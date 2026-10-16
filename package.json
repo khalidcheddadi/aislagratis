@@ -1,0 +1,30 @@
+{
+    "name": "aislaplus",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "watch": "vite build --watch"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.11",
+        "@tailwindcss/typography": "^0.5.20",
+        "@tailwindcss/vite": "^4.0.0",
+        "alpinejs": "^3.17.3",
+        "autoprefixer": "^10.4.20",
+        "axios": "^1.7.9",
+        "laravel-vite-plugin": "^1.2.0",
+        "postcss": "^8.4.49",
+        "tailwindcss": "^4.3.3",
+        "vite": "^6.0.0"
+    },
+    "dependencies": {
+        "aos": "^2.3.4",
+        "sweetalert2": "^11.26.25"
+    },
+    "overrides": {
+        "postcss-selector-parser": "^7.1.6"
+    }
+}

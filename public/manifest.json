@@ -1,0 +1,44 @@
+{
+  "name": "aislagratis - Aislamiento Térmico",
+  "short_name": "aislagratis",
+  "description": "Aislamiento de áticos y bajo cubierta con lana mineral. Estudio técnico gratuito y orientación sobre elegibilidad para el programa CAE.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#1B5E20",
+  "lang": "es",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/icons/icon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Solicitar estudio",
+      "short_name": "Estudio",
+      "description": "Solicitar un estudio gratuito",
+      "url": "/solicitar-estudio",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ver servicios",
+      "short_name": "Servicios",
+      "description": "Ver todos los servicios",
+      "url": "/servicios",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sobre nosotros",
+      "short_name": "Nosotros",
+      "description": "Conoce aislagratis",
+      "url": "/sobre-nosotros",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": []
+}

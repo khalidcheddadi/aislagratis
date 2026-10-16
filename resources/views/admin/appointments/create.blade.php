@@ -1,0 +1,13 @@
+@extends('layouts.admin')
+@section('title', 'Programar cita')
+@section('content')
+    <section class="admin-intro"><div class="admin-intro-copy"><span class="admin-eyebrow"><i class="fa-solid fa-calendar-plus"></i> NUEVA VISITA</span><h1>Programar una cita</h1><p>Selecciona la solicitud, asigna un técnico y define cuándo se realizará la visita.</p></div><div class="admin-intro-image"><img src="{{ asset('images/image12.jpg') }}" alt="Vivienda eficiente"></div></section>
+    <section class="admin-panel"><div class="admin-panel-head"><h2>Datos de la cita</h2><a class="admin-button" href="{{ route('admin.appointments.index') }}"><i class="fa-solid fa-arrow-left"></i> Volver</a></div><div class="admin-panel-body"><form method="POST" action="{{ route('admin.appointments.store') }}">@csrf<div class="admin-form-grid">
+        <div class="admin-field"><label for="lead_id">Solicitud</label><select id="lead_id" name="lead_id" required><option value="">Selecciona un cliente potencial</option>@foreach($leads as $lead)<option value="{{ $lead->id }}" @selected((string)old('lead_id', $preselectedLeadId) === (string)$lead->id)>{{ $lead->first_name }} {{ $lead->last_name }} · {{ $lead->email }}</option>@endforeach</select></div>
+        <div class="admin-field"><label for="technician_id">Técnico asignado</label><select id="technician_id" name="technician_id"><option value="">Sin asignar</option>@foreach($technicians as $technician)<option value="{{ $technician->id }}" @selected(old('technician_id') == $technician->id)>{{ $technician->first_name }} {{ $technician->last_name }}</option>@endforeach</select></div>
+        <div class="admin-field"><label for="appointment_date">Fecha y hora</label><input id="appointment_date" type="datetime-local" name="appointment_date" value="{{ old('appointment_date') }}" required></div>
+        <div class="admin-field"><label for="duration_minutes">Duración (minutos)</label><input id="duration_minutes" type="number" name="duration_minutes" min="15" max="480" step="15" value="{{ old('duration_minutes', 60) }}" required></div>
+        <div class="admin-field admin-field-full"><label for="notes">Notas</label><textarea id="notes" name="notes" maxlength="2000">{{ old('notes') }}</textarea></div>
+        <div class="admin-field-full"><button type="submit" class="admin-button admin-button-primary"><i class="fa-solid fa-calendar-check"></i> Guardar cita</button></div>
+    </div></form></div></section>
+@endsection
