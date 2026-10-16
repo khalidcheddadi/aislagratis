@@ -43,12 +43,12 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm ci
 
+      - name: Build frontend assets
+        run: npm run build
+
       - name: Run tests
         run: php artisan test
         env:
           APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
           APP_DEBUG: '0'
           APP_LOCALE: es
-
-      - name: Build frontend assets
-        run: npm run build
