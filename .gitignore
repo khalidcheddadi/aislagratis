@@ -22,6 +22,7 @@
 /storage/framework/cache/data/*
 /storage/framework/sessions/*
 /storage/framework/views/*
+!/storage/framework/views/.gitignore
 /storage/framework/testing/*
 /bootstrap/cache/*.php
 /database/*.sqlite*
