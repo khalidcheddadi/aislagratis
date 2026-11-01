@@ -18,6 +18,7 @@ test('registration screen can be rendered', function () {
     $response = $this->get('/register');
 
     $response->assertStatus(200);
+    expect($response->headers->get('Cache-Control'))->toContain('no-store');
 });
 
 test('new users can register', function () {

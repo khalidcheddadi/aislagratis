@@ -431,9 +431,7 @@
 
 @section('content')
 
-    <div class="standalone-public-header">
-        @include('partials.public-header')
-    </div>
+    @include('partials.shared-site-header')
 
     <section class="story-section" id="historia">
         <div class="container story-container">
@@ -441,14 +439,14 @@
                 <picture>
                     <source
                         type="image/webp"
-                        srcset="{{ asset('images/image6-320.webp') }} 320w, {{ asset('images/image6-640.webp') }} 640w, {{ asset('images/image6-960.webp') }} 960w"
-                        sizes="(max-width: 480px) 200px, (max-width: 768px) 260px, 380px">
-                    <img src="{{ asset('images/image6.jpg') }}" alt="Aislamiento insuflado aplicado en un ático bajo cubierta" class="blob-img" loading="lazy" decoding="async" width="1600" height="1200">
+                        srcset="{{ asset('images/aislamiento-cubierta-instalado-640.webp') }} 640w"
+                        sizes="(max-width: 480px) 92vw, (max-width: 768px) 80vw, 48vw">
+                    <img src="{{ asset('images/aislamiento-cubierta-instalado.jpg') }}" alt="Aislamiento insuflado aplicado en un ático bajo cubierta" class="blob-img" fetchpriority="high" decoding="async" width="1600" height="1200">
                 </picture>
             </div>
             <div class="story-content" data-aos="fade-left">
                 <span class="subtitle">Aislamiento Rbay · aislagratis</span>
-                <h2>Especialistas en aislamiento de áticos</h2>
+                <h1>Especialistas en aislamiento de áticos</h1>
                 <p>Nos centramos en viviendas unifamiliares y en el aislamiento del desván o bajo cubierta, una zona importante para reducir las pérdidas de energía. Valoramos la aplicación de lana de roca o aislamiento mineral insuflado mediante maquinaria, según las características del inmueble.</p>
                 <p>También orientamos sobre el sistema de Certificados de Ahorro Energético (CAE), regulado en España por el Real Decreto 36/2023: estudio técnico, revisión de requisitos, gestión documental, ejecución de la actuación y validación final cuando corresponda.</p>
                 <a href="{{ route('leads.create') }}" class="cta-button" style="margin-bottom:0;">Solicitar estudio gratuito</a>

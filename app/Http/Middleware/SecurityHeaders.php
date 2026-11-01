@@ -14,11 +14,17 @@ class SecurityHeaders
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
-        $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self)');
+        $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+
+        if ($request->routeIs('login', 'register', 'password.request', 'password.reset')) {
+            $response->headers->set('Cache-Control', 'no-store, private, max-age=0, must-revalidate');
+            $response->headers->set('Pragma', 'no-cache');
+            $response->headers->set('Expires', '0');
+        }
 
         if (app()->environment('production')) {
             if ($request->isSecure()) {
-                $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+                $response->headers->set('Strict-Transport-Security', 'max-age=31536000');
             }
 
             $response->headers->set(

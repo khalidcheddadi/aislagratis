@@ -354,8 +354,6 @@
         .btn-login { padding: 14px 24px; font-size: 0.75rem; }
     }
 
-    .auth-header-shell { padding: 1rem clamp(16px, 4vw, 64px); background: #fff; border-bottom: 1px solid var(--border-light); }
-    .auth-header-shell .custom-header { padding: 0; }
     .login-hero-section { min-height: 0; padding: clamp(24px, 5vw, 64px) 20px; background: #f1f5f0; }
     .login-hero-section::before, .login-hero-section::after { display: none; }
     .auth-layout {
@@ -403,9 +401,7 @@
 
 @section('content')
 
-    <div class="auth-header-shell">
-        @include('partials.public-header')
-    </div>
+    @include('partials.shared-site-header')
 
     <main>
         <section class="login-hero-section">
@@ -414,9 +410,9 @@
                     <picture class="auth-story-media">
                         <source
                             type="image/webp"
-                            srcset="{{ asset('images/image12-320.webp') }} 320w, {{ asset('images/image12-640.webp') }} 640w, {{ asset('images/image12-960.webp') }} 960w"
+                            srcset="{{ asset('images/aislamiento-cubierta-instalado-640.webp') }} 640w"
                             sizes="(max-width: 820px) 100vw, 45vw">
-                        <img class="auth-story-image" src="{{ asset('images/image12.jpg') }}" alt="Aislamiento de lana mineral insuflado en un ático" width="1200" height="1600" decoding="async">
+                        <img class="auth-story-image" src="{{ asset('images/aislamiento-cubierta-instalado.jpg') }}" alt="Aislamiento de lana mineral insuflado en un ático" width="1200" height="1600" fetchpriority="high" decoding="async">
                     </picture>
                     <div class="auth-story-content">
                         <span class="auth-story-label">aislagratis · TU ESPACIO PERSONAL</span>
@@ -440,6 +436,10 @@
 
                 @if(session('status') === 'email-verified')
                     <div class="alert-success" role="status">Tu correo ha sido verificado. Inicia sesión para continuar.</div>
+                @endif
+
+                @if(request()->boolean('session_expired'))
+                    <div class="alert-error" role="alert">Tu sesión caducó antes de completar el acceso. El formulario se ha actualizado; vuelve a intentarlo.</div>
                 @endif
 
                 @if($errors->any())

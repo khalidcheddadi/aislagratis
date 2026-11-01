@@ -107,27 +107,7 @@
 
 @section('content')
 
-    <header class="custom-header">
-        <div class="custom-nav-container">
-            <a href="{{ route('home') }}" class="custom-logo">
-                <img class="logo-icon" src="{{ asset('icons/icon-192.png') }}?v={{ filemtime(public_path('icons/icon-192.png')) }}" alt="" aria-hidden="true" width="30" height="30">
-                <span>aislagratis</span>
-            </a>
-            <nav class="custom-nav">
-                <a href="{{ route('home') }}">Inicio</a>
-                <a href="{{ route('services.index') }}">Servicios</a>
-                <a href="{{ route('about') }}">Sobre nosotros</a>
-                <a href="{{ route('leads.create') }}">Solicitar estudio</a>
-                @auth
-                    <a href="{{ auth()->user()->dashboardRoute() }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->first_name }}</a>
-                @else
-                    <a href="{{ route('login') }}">Iniciar sesión</a>
-                    <a href="{{ route('register') }}">Registrarse</a>
-                @endauth
-            </nav>
-            <a href="{{ route('leads.create') }}" class="btn-solicitar">Solicitar estudio</a>
-        </div>
-    </header>
+    @include('partials.shared-site-header')
 
     <main>
         <section class="privacy-hero">

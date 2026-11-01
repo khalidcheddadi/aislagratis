@@ -28,8 +28,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
             SetLocale::class,
-            SecurityHeaders::class,
         ]);
+
+        $middleware->append(SecurityHeaders::class);
 
         $middleware->alias([
             'active' => EnsureUserIsActive::class,
@@ -39,10 +40,26 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->throttleApi('60,1');
-
-        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function (HttpException $exception, Request $request) {
+            if ($exception->getStatusCode() !== 419
+                || $request->expectsJson()
+                || ! $request->isMethod('POST')) {
+                return null;
+            }
+
+            $route = match ($request->path()) {
+                'login' => 'login',
+                'register' => 'register',
+                default => null,
+            };
+
+            return $route
+                ? redirect()->route($route, ['session_expired' => 1])
+                : null;
+        });
+
         $exceptions->render(function (NotFoundHttpException $exception, Request $request) {
             if ($request->expectsJson()) {
                 return null;

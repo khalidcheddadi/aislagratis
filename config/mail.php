@@ -2,38 +2,7 @@
 
 return [
 
-    
-
-
-
-
-
-
-
-
-
-
-
     'default' => env('MAIL_MAILER', 'log'),
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     'mailers' => [
 
@@ -56,10 +25,7 @@ return [
 
         'postmark' => [
             'transport' => 'postmark',
-             
-             
-             
-             
+
         ],
 
         'resend' => [
@@ -100,19 +66,8 @@ return [
 
     ],
 
-    
-
-
-
-
-
-
-
-
-
-
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', env('BUSINESS_EMAIL', 'info@aislagratis.es')),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 

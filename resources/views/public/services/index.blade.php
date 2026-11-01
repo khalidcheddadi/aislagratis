@@ -45,23 +45,21 @@
 
 @section('content')
 
-    <div class="standalone-public-header">
-        @include('partials.public-header')
-    </div>
+    @include('partials.shared-site-header')
 
     <section class="services-hero-section" id="servicios">
         <div class="container">
             <div class="services-hero-header" data-aos="fade-up">
                 <div class="services-sub">Actuaciones<br>en cubierta</div>
-                <div class="services-title">Aislamiento<br>y gestión CAE</div>
+                <h1 class="services-title">Aislamiento<br>y gestión CAE</h1>
             </div>
 
             <div class="services-blob-grid">
                     <div class="service-blob-card" data-aos="fade-up" data-aos-delay="0">
                         <div class="service-blob-image">
                             <picture>
-                                <source type="image/webp" srcset="{{ asset('images/image6-320.webp') }} 320w, {{ asset('images/image6-640.webp') }} 640w, {{ asset('images/image6-960.webp') }} 960w" sizes="(max-width: 560px) 92vw, (max-width: 900px) 28vw, 46vw">
-                                <img src="{{ asset('images/image6.jpg') }}" alt="Lana mineral insuflada en el suelo de un ático" loading="lazy" decoding="async" width="1600" height="1200">
+                                <source type="image/webp" srcset="{{ asset('images/insuflado-mecanico-640.webp') }} 640w" sizes="(max-width: 560px) 92vw, (max-width: 900px) 45vw, 30vw">
+                                <img src="{{ asset('images/insuflado-mecanico.jpg') }}" alt="Lana mineral insuflada en el suelo de un ático" loading="lazy" decoding="async" width="1600" height="1200">
                             </picture>
                             <div class="service-icon-overlay">
                                 <i class="fa-solid fa-house-chimney"></i>
@@ -74,8 +72,8 @@
                     <div class="service-blob-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="service-blob-image">
                             <picture>
-                                <source type="image/webp" srcset="{{ asset('images/image7-320.webp') }} 320w, {{ asset('images/image7-640.webp') }} 640w, {{ asset('images/image7-960.webp') }} 960w" sizes="(max-width: 560px) 92vw, (max-width: 900px) 28vw, 22vw">
-                                <img src="{{ asset('images/image7.jpg') }}" alt="Capa de aislamiento insuflado bajo una cubierta inclinada" loading="lazy" decoding="async" width="1200" height="1600">
+                                <source type="image/webp" srcset="{{ asset('images/aislamiento-cubierta-instalado-640.webp') }} 640w" sizes="(max-width: 560px) 92vw, (max-width: 900px) 45vw, 30vw">
+                                <img src="{{ asset('images/aislamiento-cubierta-instalado.jpg') }}" alt="Capa de aislamiento insuflado bajo una cubierta inclinada" loading="lazy" decoding="async" width="1200" height="1600">
                             </picture>
                             <div class="service-icon-overlay">
                                 <i class="fa-solid fa-gears"></i>
@@ -88,8 +86,8 @@
                     <div class="service-blob-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-blob-image">
                             <picture>
-                                <source type="image/webp" srcset="{{ asset('images/image3-320.webp') }} 320w, {{ asset('images/image3-640.webp') }} 640w" sizes="(max-width: 560px) 92vw, (max-width: 900px) 28vw, 22vw">
-                                <img src="{{ asset('images/image3.jpg') }}" alt="Revisión técnica del aislamiento de una cubierta" loading="lazy" decoding="async" width="900" height="1600">
+                                <source type="image/webp" srcset="{{ asset('images/colocacion-lana-mineral-640.webp') }} 640w" sizes="(max-width: 560px) 92vw, (max-width: 900px) 45vw, 30vw">
+                                <img src="{{ asset('images/colocacion-lana-mineral.jpg') }}" alt="Revisión técnica del aislamiento de una cubierta" loading="lazy" decoding="async" width="900" height="1600">
                             </picture>
                             <div class="service-icon-overlay">
                                 <i class="fa-solid fa-file-circle-check"></i>

@@ -25,12 +25,33 @@ class AppointmentController extends Controller
             'status', 'technician_id', 'date',
         ]);
         $upcomingCount = null;
+        $technicianSummary = null;
+        $nextAppointment = null;
         if ($request->user()->isTechnician()) {
+            $technicianAppointments = Appointment::query()
+                ->where('technician_id', $request->user()->id);
             $filters['technician_id'] = $request->user()->id;
-            $upcomingCount = Appointment::where('technician_id', $request->user()->id)
+            $upcomingCount = (clone $technicianAppointments)
                 ->where('appointment_date', '>=', now())
                 ->whereIn('status', [AppointmentStatus::PENDING, AppointmentStatus::CONFIRMED])
                 ->count();
+            $technicianSummary = [
+                'assigned' => (clone $technicianAppointments)->count(),
+                'upcoming' => $upcomingCount,
+                'awaiting' => (clone $technicianAppointments)
+                    ->where('status', AppointmentStatus::PENDING)
+                    ->count(),
+                'completed_today' => (clone $technicianAppointments)
+                    ->where('status', AppointmentStatus::COMPLETED)
+                    ->whereDate('appointment_date', today())
+                    ->count(),
+            ];
+            $nextAppointment = (clone $technicianAppointments)
+                ->with('lead:id,first_name,last_name,address,city')
+                ->where('appointment_date', '>=', now())
+                ->whereIn('status', [AppointmentStatus::PENDING, AppointmentStatus::CONFIRMED])
+                ->orderBy('appointment_date')
+                ->first();
         }
         $appointments = $this->service->paginate($filters);
 
@@ -39,6 +60,8 @@ class AppointmentController extends Controller
             'technicians' => User::technicians()->active()->get(['id', 'first_name', 'last_name']),
             'statuses' => AppointmentStatus::cases(),
             'upcomingCount' => $upcomingCount,
+            'technicianSummary' => $technicianSummary,
+            'nextAppointment' => $nextAppointment,
         ]);
     }
 

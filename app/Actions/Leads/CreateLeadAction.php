@@ -26,6 +26,18 @@ class CreateLeadAction
             'has_attic' => (bool) ($data['has_attic'] ?? false),
             'has_basement' => (bool) ($data['has_basement'] ?? false),
             'access_type' => $data['access_type'] ?? null,
+            'is_owner' => isset($data['eligibility_owner'])
+                ? $data['eligibility_owner'] === 'Sí'
+                : null,
+            'eligibility_property_kind' => $data['eligibility_property_kind'] ?? null,
+            'eligibility_zone' => $data['eligibility_zone'] ?? null,
+            'eligibility_access' => $data['eligibility_access'] ?? null,
+            'eligibility_habitable' => $data['eligibility_habitable'] ?? null,
+            'eligibility_age' => $data['eligibility_age'] ?? null,
+            'eligibility_prior_aid' => $data['eligibility_aid'] ?? null,
+            'contact_preference' => $data['eligibility_contact_preference'] ?? null,
+            'cadastral_reference' => $data['cadastral_reference'] ?? null,
+            'privacy_accepted_at' => isset($data['privacy']) ? now() : null,
             'message' => $data['message'] ?? null,
             'status' => LeadStatus::NEW,
             'source' => $data['source'] ?? 'web',

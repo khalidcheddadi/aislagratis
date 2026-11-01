@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AppointmentController;
+use App\Http\Controllers\Admin\CookieConsentController;
 use App\Http\Controllers\Admin\CoverageAreaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
@@ -19,6 +20,9 @@ Route::middleware(['auth', 'verified', 'active', 'role:admin|sales|technician'])
     ->group(function () {
 
         Route::get('/', DashboardController::class)->middleware('role:admin|sales')->name('dashboard');
+        Route::get('cookie-consents', [CookieConsentController::class, 'index'])
+            ->middleware('role:admin')
+            ->name('cookie-consents.index');
 
         Route::resource('leads', LeadController::class)->only(['index', 'show'])->middleware('role:admin|sales');
         Route::patch('leads/{lead}/status', [LeadController::class, 'updateStatus'])->middleware('role:admin|sales')

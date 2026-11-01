@@ -1,0 +1,550 @@
+body.brand-experience .shared-site-header,
+body.guest-shell .shared-site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px clamp(8px, 2vw, 24px);
+    color: #334155;
+    background: transparent !important;
+}
+
+body.brand-experience:not(.brand-home) .shared-site-header {
+    background: transparent !important;
+}
+
+body.brand-home .shared-site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px clamp(8px, 2vw, 24px);
+    color: #334155;
+    background: transparent !important;
+}
+
+.home-nav-header {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.home-nav-shell {
+    display: flex;
+    box-sizing: border-box;
+    width: min(100%, 1280px);
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(12px, 2vw, 28px);
+    margin: 0 auto;
+    padding: 8px clamp(14px, 2vw, 26px);
+    border: 1px solid rgba(226, 232, 240, 0.82);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.home-nav-primary,
+.home-nav-actions {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: clamp(12px, 1.8vw, 26px);
+}
+
+.home-nav-primary {
+    flex: 1 1 0;
+}
+
+.home-nav-actions {
+    flex: 1 1 0;
+    justify-content: flex-end;
+}
+
+.home-nav-primary a,
+.home-nav-secondary,
+.home-nav-dropdown summary {
+    color: #334155 !important;
+    font-family: "Plus Jakarta Sans", "Montserrat", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.home-nav-link,
+.home-nav-secondary {
+    position: relative;
+    padding: 8px 0;
+    transition: color 0.2s ease;
+}
+
+.home-nav-primary a:hover,
+.home-nav-primary a.active,
+.home-nav-secondary:hover,
+.home-nav-secondary.active,
+.home-nav-dropdown[open] > summary {
+    color: #0f766e !important;
+}
+
+.home-nav-primary .home-nav-link::after,
+.home-nav-secondary::after {
+    position: absolute;
+    right: 0;
+    bottom: 1px;
+    left: 0;
+    height: 1px;
+    background: #0f766e;
+    content: "";
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+.home-nav-primary .home-nav-link:hover::after,
+.home-nav-primary .home-nav-link.active::after,
+.home-nav-secondary:hover::after,
+.home-nav-secondary.active::after {
+    transform: scaleX(1);
+}
+
+.home-nav-dropdown {
+    position: relative;
+}
+
+.home-nav-dropdown summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 0;
+    cursor: pointer;
+    list-style: none;
+}
+
+.home-nav-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.home-nav-dropdown summary svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+    transition: transform 0.2s ease;
+}
+
+.home-nav-dropdown[open] summary svg {
+    transform: rotate(180deg);
+}
+
+.home-nav-mega {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: -18px;
+    display: grid;
+    width: min(660px, calc(100vw - 32px));
+    grid-template-columns: 1fr 1fr 1.05fr;
+    gap: 22px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+}
+
+.home-nav-column,
+.home-mobile-column {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.home-nav-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #94a3b8;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.home-nav-mega .home-nav-column a,
+.home-nav-mega .home-nav-column button,
+.home-mobile-menu a,
+.home-mobile-menu button {
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    border: 0;
+    color: #475569 !important;
+    background: transparent;
+    font: 600 0.78rem/1.5 "Plus Jakarta Sans", "Montserrat", sans-serif;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.home-nav-mega .home-nav-column a:hover,
+.home-nav-mega .home-nav-column a.active,
+.home-nav-mega .home-nav-column button:hover,
+.home-mobile-menu a:hover,
+.home-mobile-menu a.active,
+.home-mobile-menu button:hover {
+    color: #0f766e !important;
+}
+
+.home-nav-column form,
+.home-mobile-column form {
+    width: 100%;
+}
+
+.home-nav-promo {
+    position: relative;
+    display: flex;
+    min-height: 235px;
+    align-items: stretch;
+    overflow: hidden;
+    padding: 17px;
+    border-radius: 18px;
+    background: #10232b;
+    isolation: isolate;
+}
+
+.home-nav-promo img,
+.home-nav-promo-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.home-nav-promo img {
+    object-fit: cover;
+    object-position: center 48%;
+    transition: transform 450ms ease;
+}
+
+.home-nav-promo:hover img {
+    transform: scale(1.045);
+}
+
+.home-nav-promo-shade {
+    background: linear-gradient(180deg, rgba(7, 17, 23, 0.05) 5%, rgba(7, 17, 23, 0.28) 35%, rgba(7, 17, 23, 0.92) 100%);
+}
+
+.home-nav-promo-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.home-nav-promo-content > span {
+    color: #a7f3e7;
+    font: 800 0.55rem/1.4 "Montserrat", sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.home-nav-promo-content > strong {
+    max-width: 240px;
+    color: #fff;
+    font: 700 1rem/1.25 "Plus Jakarta Sans", "Montserrat", sans-serif;
+    letter-spacing: -0.035em;
+}
+
+.home-nav-promo-content a {
+    display: inline-flex;
+    min-height: 39px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 4px;
+    padding: 0 15px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    color: #06201d !important;
+    background: linear-gradient(110deg, #5eead4, #c2fb7d);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    font: 800 0.66rem "Plus Jakarta Sans", "Montserrat", sans-serif;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-nav-promo-content a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(45, 212, 191, 0.24);
+}
+
+.home-nav-cta,
+.home-mobile-cta {
+    min-height: 43px;
+    padding: 0 21px;
+    color: #06201d !important;
+    background: linear-gradient(110deg, #5eead4, #c2fb7d);
+    box-shadow: 0 8px 20px rgba(45, 212, 191, 0.2);
+    font-weight: 800;
+}
+
+.home-mobile-cta {
+    width: 100%;
+    text-align: center !important;
+}
+
+.home-nav-cta:hover,
+.home-mobile-menu .home-mobile-cta:hover {
+    color: #06201d !important;
+    background: linear-gradient(110deg, #8ff4e3, #d0fb9b);
+    box-shadow: 0 11px 26px rgba(45, 212, 191, 0.28);
+    transform: translateY(-2px);
+}
+
+.home-nav-cta:focus-visible,
+.home-nav-promo-content a:focus-visible,
+.home-mobile-menu .home-mobile-cta:focus-visible {
+    outline: 3px solid rgba(45, 212, 191, 0.7);
+    outline-offset: 3px;
+}
+
+.home-nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    flex: 0 0 auto;
+    color: #0f172a !important;
+    font-family: "Plus Jakarta Sans", "Montserrat", sans-serif;
+    font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.home-nav-brand-icon {
+    width: 1.08em;
+    height: 1.08em;
+    flex: 0 0 auto;
+    border-radius: 0.26em;
+    object-fit: cover;
+}
+
+.home-nav-brand span {
+    align-self: flex-start;
+    margin-left: 1px;
+    font-size: 0.55em;
+    font-weight: 500;
+    vertical-align: super;
+}
+
+.home-nav-cta,
+.home-mobile-cta {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 19px;
+    border: 0;
+    border-radius: 999px;
+    color: #fff !important;
+    background: #0a161e;
+    box-shadow: 0 5px 14px rgba(10, 22, 30, 0.18);
+    font-family: "Plus Jakarta Sans", "Montserrat", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-nav-cta:hover,
+.home-mobile-cta:hover {
+    color: #fff !important;
+    background: #1e293b;
+    box-shadow: 0 8px 18px rgba(10, 22, 30, 0.2);
+    transform: translateY(-1px);
+}
+
+.home-nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    color: #334155;
+    background: rgba(255, 255, 255, 0.72);
+    cursor: pointer;
+}
+
+.home-nav-toggle svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+}
+
+.home-mobile-menu {
+    display: grid;
+    width: min(100%, 1280px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin: 8px auto 0;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.home-mobile-promo {
+    grid-column: 1 / -1;
+    min-height: 180px;
+}
+
+.home-mobile-promo .home-nav-promo-content > strong {
+    max-width: 420px;
+}
+
+.home-mobile-menu.hidden {
+    display: none !important;
+}
+
+.home-mobile-cta {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.home-nav-header :focus-visible,
+.home-mobile-menu :focus-visible {
+    outline: 3px solid rgba(20, 184, 166, 0.55);
+    outline-offset: 3px;
+}
+
+.home-mobile-menu a.home-mobile-cta {
+    display: flex;
+    min-height: 43px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 999px;
+    color: #06201d !important;
+    background: linear-gradient(110deg, #5eead4, #c2fb7d);
+    box-shadow: 0 8px 20px rgba(45, 212, 191, 0.2);
+    font-weight: 800;
+    text-align: center;
+}
+
+.home-mobile-menu a.home-mobile-cta:hover {
+    color: #06201d !important;
+    background: linear-gradient(110deg, #8ff4e3, #d0fb9b);
+    box-shadow: 0 11px 26px rgba(45, 212, 191, 0.28);
+}
+
+@media (max-width: 850px) {
+    .home-nav-primary,
+    .home-nav-secondary {
+        display: none;
+    }
+
+    .home-nav-shell {
+        min-height: 58px;
+    }
+
+    .home-nav-toggle {
+        display: inline-flex;
+    }
+
+    .home-nav-actions {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    body.brand-experience .shared-site-header,
+    body.guest-shell .shared-site-header {
+        padding: 7px 8px;
+    }
+
+    .home-nav-shell {
+        min-height: 54px;
+        gap: 8px;
+        padding: 6px 10px 6px 15px;
+    }
+
+    .home-nav-cta {
+        min-height: 36px;
+        padding: 0 12px;
+        font-size: 0.67rem;
+    }
+
+    .home-nav-toggle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .home-mobile-menu {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 14px;
+        padding: 16px;
+    }
+
+    .home-mobile-promo {
+        min-height: 165px;
+        padding: 15px;
+    }
+
+    .home-mobile-promo .home-nav-promo-content {
+        gap: 7px;
+    }
+
+    .home-mobile-promo .home-nav-promo-content > strong {
+        max-width: 300px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 390px) {
+    .home-nav-brand {
+        font-size: 1rem;
+    }
+
+    .home-nav-cta {
+        padding: 0 9px;
+        font-size: 0.62rem;
+    }
+
+    .home-mobile-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .home-mobile-promo {
+        min-height: 175px;
+    }
+
+    .home-mobile-promo .home-nav-promo-content > strong {
+        font-size: 0.88rem;
+    }
+}

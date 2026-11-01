@@ -174,7 +174,7 @@
     <main class="verify-hero">
         <div class="verify-layout">
             <div class="verify-photo">
-                <img src="{{ asset('images/image12.jpg') }}" alt="Vivienda con mejoras de eficiencia energética">
+                <img src="{{ asset('images/image12-640.webp') }}" alt="Vivienda con mejoras de eficiencia energética">
                 <div class="verify-photo-copy">
                     <span>aislagratis · Tu espacio personal</span>
                     <h2>Un hogar más eficiente empieza aquí.</h2>

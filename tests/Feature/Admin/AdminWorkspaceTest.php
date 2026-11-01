@@ -45,13 +45,44 @@ test('admin workspace screens render', function () {
     }
 });
 
+test('admin dashboard shows the analytics layout with live lead insights', function () {
+    $this->seed(RolesAndPermissionsSeeder::class);
+    app(ActivityLogStatus::class)->disable();
+
+    $admin = User::factory()->admin()->create();
+    $admin->assignRole(UserRole::ADMIN->value);
+    Lead::factory()->create([
+        'province' => 'Madrid',
+        'status' => 'nuevo',
+    ]);
+
+    $this->actingAs($admin)
+        ->get(route('admin.dashboard'))
+        ->assertOk()
+        ->assertSee('Ahorro neto generado')
+        ->assertSee('Solicitudes por estado')
+        ->assertSee('Dinámica de solicitudes')
+        ->assertSee('Volumen por provincia')
+        ->assertSee('Madrid')
+        ->assertSee('images/image10-640.webp')
+        ->assertSee('id="adminSidebar"', false)
+        ->assertSee('aria-controls="adminSidebar"', false)
+        ->assertSee(route('admin.users.index'), false)
+        ->assertSee('Solicitudes recientes');
+});
+
 test('sales can use operational screens but cannot access admin-only reports', function () {
     $this->seed(RolesAndPermissionsSeeder::class);
 
     $sales = User::factory()->sales()->create();
     $sales->assignRole(UserRole::SALES->value);
 
-    $this->actingAs($sales)->get(route('admin.dashboard'))->assertOk();
+    $this->actingAs($sales)
+        ->get(route('admin.dashboard'))
+        ->assertOk()
+        ->assertSee('PANEL COMERCIAL')
+        ->assertSee('Organiza el seguimiento de solicitudes')
+        ->assertSee('admin-role-sales', false);
     $this->get(route('admin.leads.index'))->assertOk();
     $this->get(route('admin.appointments.index'))->assertOk();
     $this->get(route('admin.installations.index'))->assertOk();
@@ -71,6 +102,12 @@ test('technicians only see assigned appointments and can complete them', functio
         'lead_id' => Lead::factory()->create(['first_name' => 'AssignedClient'])->id,
     ]);
     Appointment::factory()->create([
+        'technician_id' => $technician->id,
+        'lead_id' => Lead::factory()->create(['first_name' => 'CompletedClient'])->id,
+        'appointment_date' => today()->setTime(10, 0),
+        'status' => 'realizada',
+    ]);
+    Appointment::factory()->create([
         'technician_id' => $otherTechnician->id,
         'lead_id' => Lead::factory()->create(['first_name' => 'PrivateClient'])->id,
     ]);
@@ -78,7 +115,17 @@ test('technicians only see assigned appointments and can complete them', functio
     $this->actingAs($technician)
         ->get(route('admin.appointments.index'))
         ->assertOk()
+        ->assertSee('aria-controls="adminSidebar"', false)
+        ->assertSee(route('admin.appointments.index'), false)
+        ->assertSee('ESPACIO TÉCNICO')
+        ->assertSee('Próxima visita')
+        ->assertSee('Citas asignadas')
+        ->assertViewHas('technicianSummary', fn (array $summary) => $summary['assigned'] === 2
+            && $summary['upcoming'] === 1
+            && $summary['awaiting'] === 1
+            && $summary['completed_today'] === 1)
         ->assertSee('AssignedClient')
+        ->assertSee('CompletedClient')
         ->assertDontSee('PrivateClient');
 
     $this->patch(route('admin.appointments.status', $assigned), ['status' => 'realizada'])
@@ -130,6 +177,15 @@ test('customer screens render and property data stays private', function () {
     foreach ($paths as $path) {
         $this->get($path)->assertOk();
     }
+
+    $this->get(route('customer.dashboard'))
+        ->assertOk()
+        ->assertSee('aria-controls="adminSidebar"', false)
+        ->assertSee(route('customer.leads.index'), false)
+        ->assertSee('images/image12-640.webp')
+        ->assertSee('TU ESPACIO PERSONAL')
+        ->assertSee('Estado de tus solicitudes')
+        ->assertSee('Enviadas por ti');
 
     $this->get(route('customer.leads.index'))
         ->assertSee('VisibleCustomer')

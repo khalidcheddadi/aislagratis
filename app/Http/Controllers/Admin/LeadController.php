@@ -6,6 +6,7 @@ use App\Enums\LeadStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateLeadStatusRequest;
 use App\Models\Lead;
+use App\Services\LeadExcelExporter;
 use App\Services\LeadService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -58,12 +59,10 @@ class LeadController extends Controller
     {
         $data = $this->service->exportToArray($lead);
 
-        return response()->streamDownload(function () use ($data) {
-            $out = fopen('php://output', 'w');
-            fwrite($out, "\xEF\xBB\xBF");
-            fputcsv($out, array_keys($data));
-            fputcsv($out, array_values($data));
-            fclose($out);
-        }, "lead-{$lead->id}.csv", ['Content-Type' => 'text/csv; charset=UTF-8']);
+        return response()->streamDownload(
+            fn () => app(LeadExcelExporter::class)->stream($data),
+            "solicitud-{$lead->id}.xlsx",
+            ['Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+        );
     }
 }

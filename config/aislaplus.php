@@ -5,37 +5,28 @@ return [
     'seed_demo_users' => env('SEED_DEMO_USERS', false),
     'seeded_users' => [
         'admin' => [
-            'email' => env('SEED_ADMIN_EMAIL', 'admin@aislaplus.test'),
+            'email' => env('SEED_ADMIN_EMAIL', 'admin@aislagratis.test'),
             'password' => env('SEED_ADMIN_PASSWORD'),
             'first_name' => 'Admin',
             'last_name' => 'Demo',
         ],
         'sales' => [
-            'email' => env('SEED_SALES_EMAIL', 'sales@aislaplus.test'),
+            'email' => env('SEED_SALES_EMAIL', 'sales@aislagratis.test'),
             'password' => env('SEED_SALES_PASSWORD'),
             'first_name' => 'Sales',
             'last_name' => 'Demo',
         ],
         'technician' => [
-            'email' => env('SEED_TECHNICIAN_EMAIL', 'technician@aislaplus.test'),
+            'email' => env('SEED_TECHNICIAN_EMAIL', 'technician@aislagratis.test'),
             'password' => env('SEED_TECHNICIAN_PASSWORD'),
             'first_name' => 'Technician',
             'last_name' => 'Demo',
         ],
     ],
-    
-
-
-
 
     'phone' => env('BUSINESS_PHONE', '+34 641 322 118'),
     'phone_whatsapp' => env('BUSINESS_PHONE_WHATSAPP', '34641322118'),
-    'email' => env('BUSINESS_EMAIL', 'info@aislaplus.es'),
-
-    
-
-
-
+    'email' => env('BUSINESS_EMAIL', 'info@aislagratis.es'),
 
     'stats' => [
         'projects' => 500,
@@ -43,11 +34,6 @@ return [
         'experience' => 10,
         'cae' => 100,
     ],
-
-    
-
-
-
 
     'ticker' => [
         ['icon' => 'fa-bolt', 'text' => 'Financiación CAE al 100% sin coste inicial'],
@@ -58,21 +44,11 @@ return [
         ['icon' => 'fa-shield-halved', 'text' => 'Garantía de instalación hasta 10 años'],
     ],
 
-    
-
-
-
-
     'pwa' => [
         'name' => env('PWA_APP_NAME', 'aislagratis'),
         'theme_color' => env('PWA_THEME_COLOR', '#1B5E20'),
         'background_color' => env('PWA_BACKGROUND_COLOR', '#ffffff'),
     ],
-
-    
-
-
-
 
     'coverage_note' => '¿No ves tu provincia? Consúltanos',
 ];

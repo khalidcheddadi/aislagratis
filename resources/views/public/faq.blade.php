@@ -95,9 +95,7 @@
 
 @section('content')
 
-    <header class="custom-header" style="padding: 20px 25px;">
-        @include('partials.public-header')
-    </header>
+    @include('partials.shared-site-header')
 
     <main>
         

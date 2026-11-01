@@ -39,12 +39,16 @@ Abre `http://127.0.0.1:8000`. Para MySQL/MariaDB, configura `DB_CONNECTION`, `DB
 
 La configuracion local y los secretos deben permanecer en `.env` o en el gestor de variables del servidor; nunca los guardes en el repositorio. En produccion configura como minimo:
 
-- `APP_ENV=production`, `APP_DEBUG=false` y `APP_URL=https://tu-dominio`.
+- `APP_ENV=production`, `APP_DEBUG=false` y `APP_URL=https://aislagratis.com`.
 - `APP_KEY` unico y generado para ese entorno.
 - Credenciales de base de datos y SMTP propias de produccion.
 - `SESSION_SECURE_COOKIE=true` y HTTPS activo.
+- Usa `SESSION_DRIVER=file` y `CACHE_STORE=file` en una unica instancia para evitar lecturas y escrituras innecesarias en MySQL. En despliegues con varias instancias, configura Redis compartido.
+- Configura `TRUSTED_PROXIES` solo con las IP/CIDR de los proxies reales que sirven la aplicacion; dejalo vacio si no hay proxy inverso.
+- Mantén `LOG_LEVEL=warning` o superior en produccion y nunca habilites `APP_DEBUG`.
+- Sustituye la direccion legal de ejemplo de la politica de privacidad por los datos reales de la entidad antes de publicar.
 
-La URL publica correcta es necesaria para generar enlaces absolutos, etiquetas canonicas, robots.txt y sitemap.xml. Revisa las etiquetas SEO y registra el sitemap publicado (`https://tu-dominio/sitemap.xml`) en Google Search Console y Bing Webmaster Tools despues de configurar el dominio.
+La URL publica correcta es necesaria para generar enlaces absolutos, etiquetas canonicas, robots.txt y sitemap.xml. Revisa las etiquetas SEO y registra el sitemap publicado (`https://aislagratis.com/sitemap.xml`) en Google Search Console y Bing Webmaster Tools despues de configurar el dominio.
 
 Las cuentas demo estan desactivadas por defecto. Para desarrollo local, define `SEED_DEMO_USERS=true` y contrasenas unicas en el `.env` privado antes de ejecutar:
 
@@ -64,13 +68,13 @@ npm ci
 npm run build
 ```
 
-GitHub Actions ejecuta las pruebas, valida `composer.json` y compila los assets al abrir un pull request o actualizar `main`.
+GitHub Actions ejecuta las pruebas, audita las dependencias PHP y JavaScript, valida `composer.json` y compila los assets al abrir un pull request o actualizar `main`.
 
 ## Despliegue en Hostinger
 
 1. Comprueba en hPanel que el plan permite Laravel y PHP 8.2+, Composer y las extensiones PHP necesarias. Crea una base MySQL/MariaDB y un usuario con permisos limitados.
 2. Despliega el repositorio fuera del directorio publico del sitio cuando sea posible. Configura el document root del dominio para que apunte exclusivamente al subdirectorio `public/` de Laravel. No expongas la raiz del proyecto, `.env`, `vendor/`, `storage/` ni `database/` por HTTP.
-3. Crea el `.env` de produccion en el servidor (no lo subas a Git) con el dominio HTTPS, `APP_DEBUG=false`, una `APP_KEY` propia, datos de MySQL y los datos SMTP reales.
+3. Crea el `.env` de produccion en el servidor (no lo subas a Git) con `APP_URL=https://aislagratis.com`, `APP_ENV=production`, `APP_DEBUG=false`, una `APP_KEY` propia, datos de MySQL y los datos SMTP reales. Activa `SESSION_SECURE_COOKIE=true`; configura `TRUSTED_PROXIES` unicamente si el servidor esta detras de un proxy inverso conocido.
 4. Instala y compila dependencias en el servidor si el plan proporciona Composer y Node.js:
 
    ```sh

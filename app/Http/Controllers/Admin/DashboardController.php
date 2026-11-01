@@ -15,12 +15,13 @@ class DashboardController extends Controller
         NotificationService $notificationService,
     ): View {
         $stats = $dashboard->getAdminStats();
+        $insights = $dashboard->getAdminDashboardInsights();
         $recentLeads = Lead::with(['service:id,name'])
             ->latest()
             ->limit(8)
             ->get();
         $unreadNotifications = $notificationService->forUser(auth()->user(), 5);
 
-        return view('admin.home', compact('stats', 'recentLeads', 'unreadNotifications'));
+        return view('admin.home', compact('stats', 'insights', 'recentLeads', 'unreadNotifications'));
     }
 }

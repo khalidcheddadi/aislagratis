@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Solicitudes')
 @section('content')
-    <section class="admin-intro"><div class="admin-intro-copy"><span class="admin-eyebrow"><i class="fa-solid fa-inbox"></i> GESTIÓN COMERCIAL</span><h1>Solicitudes</h1><p>Consulta las solicitudes recibidas, revisa su estado y accede a la información completa de cada cliente potencial.</p></div><div class="admin-intro-image"><img src="{{ asset('images/image12.jpg') }}" alt="Vivienda eficiente"></div></section>
+    <section class="admin-intro"><div class="admin-intro-copy"><span class="admin-eyebrow"><i class="fa-solid fa-inbox"></i> GESTIÓN COMERCIAL</span><h1>Solicitudes</h1><p>Consulta las solicitudes recibidas, revisa su estado y accede a la información completa de cada cliente potencial.</p></div><div class="admin-intro-image"><img src="{{ asset('images/image12-640.webp') }}" alt="Vivienda eficiente"></div></section>
     <section class="admin-panel">
         <div class="admin-panel-head"><h2><i class="fa-solid fa-filter" style="color:var(--admin-green)"></i> Filtros y resultados</h2><span class="admin-badge">{{ $leads->total() }} solicitudes</span></div>
         <div class="admin-panel-body">
@@ -26,7 +26,7 @@
                             <td style="white-space:nowrap">{{ $lead->created_at->format('d/m/Y H:i') }}</td><td><strong>{{ $lead->full_name }}</strong><br><span style="color:var(--admin-muted)">{{ $lead->property_type->label() }}</span></td>
                             <td>{{ $lead->email }}@if($lead->phone)<br><span style="color:var(--admin-muted)">{{ $lead->phone }}</span>@endif</td><td>{{ $lead->city ?? '—' }}<br><span style="color:var(--admin-muted)">{{ $lead->postal_code }}</span></td><td>{{ $lead->service?->name ?? '—' }}</td>
                             <td><span class="admin-badge {{ $status->value === 'descartado' ? 'admin-badge-danger' : ($status->value === 'contactado' ? 'admin-badge-warning' : '') }}">{{ $status->label() }}</span></td>
-                            <td><div class="admin-actions"><a class="admin-button" href="{{ route('admin.leads.show', $lead) }}" title="Ver detalles"><i class="fa-solid fa-eye"></i></a><a class="admin-button" href="{{ route('admin.leads.export', $lead) }}" title="Exportar CSV"><i class="fa-solid fa-download"></i></a><a class="admin-button" href="{{ route('admin.appointments.create', ['lead_id' => $lead->id]) }}" title="Programar cita"><i class="fa-solid fa-calendar-plus"></i></a></div></td>
+                            <td><div class="admin-actions"><a class="admin-button" href="{{ route('admin.leads.show', $lead) }}" title="Ver detalles"><i class="fa-solid fa-eye"></i></a><a class="admin-button" href="{{ route('admin.leads.export', $lead) }}" title="Descargar Excel"><i class="fa-solid fa-file-excel"></i></a><a class="admin-button" href="{{ route('admin.appointments.create', ['lead_id' => $lead->id]) }}" title="Programar cita"><i class="fa-solid fa-calendar-plus"></i></a></div></td>
                         </tr>
                     @endforeach</tbody>
                 </table></div><div class="admin-pager">{{ $leads->links() }}</div>

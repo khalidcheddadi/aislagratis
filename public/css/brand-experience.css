@@ -24,28 +24,6 @@ body.brand-experience .hero-container:not(#home-hero) {
         var(--brand-bg);
 }
 
-body.brand-experience .hero-container:not(#home-hero) .custom-header {
-    flex-wrap: nowrap;
-    gap: clamp(14px, 2.2vw, 34px);
-    padding-bottom: 18px;
-}
-
-body.brand-experience .hero-container:not(#home-hero) .logo i,
-body.brand-experience .hero-container:not(#home-hero) .logo-text .bold-text,
-body.brand-experience .hero-container:not(#home-hero) .nav-desktop a,
-body.brand-experience .hero-container:not(#home-hero) .phone-number,
-body.brand-experience .hero-container:not(#home-hero) .mobile-toggle {
-    color: var(--brand-text);
-}
-
-body.brand-experience .hero-container:not(#home-hero) .call-text {
-    color: var(--brand-muted);
-}
-
-body.brand-experience .hero-container:not(#home-hero) .nav-desktop a::after {
-    background: var(--brand-green);
-}
-
 body.brand-experience .hero-container:not(#home-hero) .hero-main {
     min-height: 0;
     padding: 32px 0 54px;
@@ -503,22 +481,6 @@ body.brand-experience .alert-success {
     background: rgba(40, 100, 47, 0.2);
 }
 
-body.brand-experience .auth-header-shell {
-    border-color: var(--brand-line);
-    background: #090c09;
-}
-
-body.brand-experience .auth-header-shell .logo i,
-body.brand-experience .auth-header-shell .logo-text .bold-text,
-body.brand-experience .auth-header-shell .nav-desktop a,
-body.brand-experience .auth-header-shell .mobile-toggle {
-    color: var(--brand-text);
-}
-
-body.brand-experience .auth-header-shell .nav-desktop a::after {
-    background: var(--brand-green);
-}
-
 body.brand-experience .login-hero-section,
 body.brand-experience .register-hero-section {
     min-height: calc(100vh - 90px);
@@ -626,54 +588,6 @@ body.brand-experience .login-link {
 body.brand-experience .site-footer {
     border-top: 1px solid var(--brand-line);
     background: #050705;
-}
-
-body.brand-experience .mobile-nav {
-    border-left: 1px solid var(--brand-line);
-    color: var(--brand-text);
-    background: #101410;
-    box-shadow: -18px 0 50px rgba(0, 0, 0, 0.42);
-}
-
-body.brand-experience .mobile-nav-header,
-body.brand-experience .mobile-nav-account {
-    border-color: var(--brand-line);
-}
-
-body.brand-experience .mobile-nav-brand,
-body.brand-experience .mobile-nav-links a,
-body.brand-experience .mobile-nav-account > a,
-body.brand-experience .mobile-nav-account form button {
-    color: var(--brand-text);
-}
-
-body.brand-experience .mobile-nav-brand i,
-body.brand-experience .mobile-nav-links a i,
-body.brand-experience .mobile-nav-account a i,
-body.brand-experience .mobile-nav-account button i {
-    color: var(--brand-green);
-}
-
-body.brand-experience .mobile-nav-close {
-    border-color: var(--brand-line);
-    color: var(--brand-text);
-    background: #1a211a;
-}
-
-body.brand-experience .mobile-nav-links a:hover,
-body.brand-experience .mobile-nav-account > a:hover,
-body.brand-experience .mobile-nav-links a.active,
-body.brand-experience .mobile-nav-account > a.active {
-    color: #e6f7e3;
-    background: rgba(68, 130, 62, 0.24);
-}
-
-body.brand-experience .mobile-nav-phone {
-    color: var(--brand-muted);
-}
-
-body.brand-experience .mobile-nav-phone strong {
-    color: var(--brand-text);
 }
 
 @media (max-width: 768px) {
@@ -1855,22 +1769,6 @@ body.brand-experience .btn-submit {
     letter-spacing: 0.1em;
 }
 
-body.brand-experience .auth-header-shell {
-    padding: 20px clamp(22px, 5.5vw, 88px);
-    border: 0;
-    background: #050705;
-}
-
-body.brand-experience .auth-header-shell .custom-header {
-    flex-wrap: nowrap;
-    gap: clamp(14px, 2.5vw, 38px);
-    padding: 0;
-}
-
-body.brand-experience .auth-header-shell .contact-info {
-    display: block;
-}
-
 body.brand-experience .auth-layout {
     grid-template-columns: minmax(0, 1.08fr) minmax(440px, 0.92fr);
     max-width: 1280px;
@@ -2033,30 +1931,11 @@ body.brand-experience .site-footer .footer-top-row {
 }
 
 @media (min-width: 769px) and (max-width: 950px) {
-    body.brand-experience .custom-header,
-    body.brand-experience .editorial-page-hero .custom-header,
-    body.brand-experience .auth-header-shell .custom-header {
+    body.brand-experience .editorial-page-hero .custom-header {
         flex-wrap: nowrap;
         gap: 10px;
     }
 
-    body.brand-experience .nav-desktop {
-        gap: 5px;
-    }
-
-    body.brand-experience .nav-desktop a {
-        font-size: 0.58rem;
-        letter-spacing: 0;
-    }
-
-    body.brand-home #home-hero .nav-desktop {
-        gap: 5px;
-    }
-
-    body.brand-home #home-hero .nav-desktop a {
-        font-size: 0.58rem;
-        letter-spacing: 0;
-    }
 }
 
 @media (max-width: 900px) {
@@ -2236,9 +2115,6 @@ body.brand-experience .site-footer .footer-top-row {
         min-height: 340px;
     }
 
-    body.brand-experience .auth-header-shell .contact-info {
-        display: none;
-    }
 }
 
 @media (max-width: 560px) {

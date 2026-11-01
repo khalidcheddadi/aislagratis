@@ -9,9 +9,7 @@
 
 @section('content')
 
-    <header class="custom-header" style="padding: 20px 25px;">
-        @include('partials.public-header')
-    </header>
+    @include('partials.shared-site-header')
 
     <div class="container" style="padding: 60px 25px; text-align: center; max-width: 900px; margin: 0 auto;">
         <i class="fa-solid fa-circle-check" style="color: #28a745; font-size: 5rem; margin-bottom: 25px; display: inline-block;"></i>

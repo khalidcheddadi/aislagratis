@@ -559,95 +559,6 @@
         .ticker-item i { color: var(--accent); font-size: 0.9rem; }
         .ticker-sep { color: rgba(255, 255, 255, 0.35); font-size: 0.6rem; }
 
-        .install-prompt {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--green-light), var(--green-dark));
-            color: var(--white);
-            padding: 14px 22px;
-            border-radius: 30px;
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(27, 94, 32, 0.35);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .install-prompt button {
-            background: var(--white);
-            border: none;
-            color: var(--black);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-        }
-
-        .install-prompt .close-prompt {
-            background: transparent;
-            color: var(--white);
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 0 5px;
-        }
-
-        .cookie-consent-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #ffffff;
-            color: #1a1a1a;
-            padding: 16px 20px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            z-index: 10000;
-            display: none;
-            border-top: 2px solid #1B5E20;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to   { transform: translateY(0); }
-        }
-
-        .cookie-consent-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .cookie-consent-text { flex: 1 1 300px; font-size: 0.9rem; line-height: 1.5; }
-        .cookie-consent-text a {
-            color: #1B5E20;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-
-        .cookie-consent-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-
-        .cookie-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-        }
-
         .cookie-btn-accept { background: #1B5E20; color: #ffffff; }
         .cookie-btn-accept:hover { background: #2e7d32; transform: translateY(-1px); }
 
@@ -730,8 +641,6 @@
         }
 
         @media (max-width: 600px) {
-            .cookie-consent-container { flex-direction: column; align-items: flex-start; }
-            .cookie-consent-buttons { width: 100%; justify-content: flex-end; }
         }
 
         @media (max-width: 480px) {
@@ -746,23 +655,34 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}?v={{ filemtime(public_path('css/home.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/brand-experience.css') }}?v={{ filemtime(public_path('css/brand-experience.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/dark-immersive.css') }}?v={{ filemtime(public_path('css/dark-immersive.css')) }}">
+    @stack('page-styles')
+    <link rel="stylesheet" href="{{ asset('css/site-theme.css') }}?v={{ filemtime(public_path('css/site-theme.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/shared-site-header.css') }}?v={{ filemtime(public_path('css/shared-site-header.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/home-navbar.css') }}?v={{ filemtime(public_path('css/home-navbar.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/brand-pages.css') }}?v={{ filemtime(public_path('css/brand-pages.css')) }}-2">
+    <link rel="stylesheet" href="{{ asset('css/shared-public-ui.css') }}?v={{ filemtime(public_path('css/shared-public-ui.css')) }}">
 </head>
 <body @class([
-    'brand-experience' => request()->routeIs('home', 'services.index', 'about', 'leads.create', 'login', 'register'),
+    'brand-experience' => true,
     'brand-home' => request()->routeIs('home'),
+    'brand-about' => request()->routeIs('about'),
+    'brand-services' => request()->routeIs('services.index'),
+    'brand-login' => request()->routeIs('login'),
+    'brand-register' => request()->routeIs('register'),
 ])>
 
-    
-    @include('partials.install-prompt')
+    @include('partials.site-prompts')
 
-    
-    @include('partials.cookie-consent')
+    @unless(request()->routeIs('home', 'services.index', 'about', 'leads.create', 'login', 'register', 'faq', 'leads.thanks', 'legal.terms', 'legal.privacy', 'services.show', 'verification.notice'))
+        @include('partials.shared-site-header')
+    @endunless
 
     @yield('content')
 
     @include('partials.public-footer')
     @include('partials.whatsapp-float')
 
+    <script src="{{ asset('js/site-prompts.js') }}?v={{ filemtime(public_path('js/site-prompts.js')) }}" defer></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
@@ -772,49 +692,27 @@
             offset: 80,
         });
 
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        const mobileNavClose = document.getElementById('mobileNavClose');
-        const mobileNavBackdrop = document.getElementById('mobileNavBackdrop');
-        if (mobileToggle && mobileNav && mobileNavBackdrop) {
-            const setMobileNavOpen = (isOpen) => {
-                mobileNav.classList.toggle('show', isOpen);
-                mobileNavBackdrop.classList.toggle('show', isOpen);
-                mobileNav.setAttribute('aria-hidden', String(!isOpen));
-                mobileToggle.setAttribute('aria-expanded', String(isOpen));
-                document.body.classList.toggle('mobile-nav-open', isOpen);
-                if (isOpen) {
-                    mobileNav.querySelector('a')?.focus();
-                } else {
-                    mobileToggle.focus();
-                }
-            };
-
-            mobileToggle.addEventListener('click', function() {
-                setMobileNavOpen(!mobileNav.classList.contains('show'));
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.toggle('hidden') === false;
+                mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+                mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
             });
-            mobileNavClose?.addEventListener('click', () => setMobileNavOpen(false));
-            mobileNavBackdrop.addEventListener('click', () => setMobileNavOpen(false));
-            mobileNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => setMobileNavOpen(false));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.setAttribute('aria-label', 'Abrir menú');
+                });
             });
             document.addEventListener('keydown', event => {
-                if (event.key === 'Escape' && mobileNav.classList.contains('show')) {
-                    setMobileNavOpen(false);
-                }
-            });
-        }
-
-        const userDropdownToggle = document.getElementById('userDropdownToggle');
-        if (userDropdownToggle) {
-            const userDropdown = userDropdownToggle.nextElementSibling;
-            userDropdownToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
-            });
-            document.addEventListener('click', function(e) {
-                if (!userDropdownToggle.contains(e.target) && !userDropdown.contains(e.target)) {
-                    userDropdown.style.display = 'none';
+                if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.setAttribute('aria-label', 'Abrir menú');
+                    mobileMenuBtn.focus();
                 }
             });
         }
@@ -844,137 +742,6 @@
                 heroSmokeEffect.classList.remove('is-active');
             });
         }
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .catch(error => {
-                        console.error('Service Worker registration failed:', error);
-                    });
-            });
-        }
-
-        let deferredPrompt;
-        const installPrompt = document.getElementById('installPrompt');
-        const installBtn = document.getElementById('installBtn');
-        const closePrompt = document.getElementById('closePrompt');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (installPrompt) installPrompt.style.display = 'flex';
-        });
-
-        if (installBtn) {
-            installBtn.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(() => {
-                        deferredPrompt = null;
-                        installPrompt.style.display = 'none';
-                    });
-                }
-            });
-        }
-
-        if (closePrompt) {
-            closePrompt.addEventListener('click', () => {
-                installPrompt.style.display = 'none';
-            });
-        }
-
-        window.addEventListener('appinstalled', () => {
-            if (installPrompt) installPrompt.style.display = 'none';
-            deferredPrompt = null;
-        });
-
-        (function() {
-            const COOKIE_CONSENT_KEY = 'cookies_consent';
-            const VISITOR_TOKEN_KEY = 'visitor_token';
-            const COOKIE_CONSENT_EXPIRY_DAYS = 365;
-            const banner = document.getElementById('cookieConsentBanner');
-            const acceptBtn = document.getElementById('acceptCookiesBtn');
-            const rejectBtn = document.getElementById('rejectCookiesBtn');
-
-            if (!banner) return;
-
-            function generateVisitorToken() {
-                if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
-                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                    const r = Math.random() * 16 | 0;
-                    const v = c === 'x' ? r : (r & 0x3 | 0x8);
-                    return v.toString(16);
-                });
-            }
-
-            function getVisitorToken() {
-                let token = localStorage.getItem(VISITOR_TOKEN_KEY);
-                if (!token) {
-                    token = generateVisitorToken();
-                    localStorage.setItem(VISITOR_TOKEN_KEY, token);
-                }
-                return token;
-            }
-
-            function getConsent() {
-                const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
-                if (!stored) return null;
-                try {
-                    const parsed = JSON.parse(stored);
-                    if (parsed && parsed.expiry && new Date(parsed.expiry) > new Date()) {
-                        return parsed.value;
-                    } else {
-                        localStorage.removeItem(COOKIE_CONSENT_KEY);
-                        return null;
-                    }
-                } catch (e) {
-                    localStorage.removeItem(COOKIE_CONSENT_KEY);
-                    return null;
-                }
-            }
-
-            function setConsentLocal(value) {
-                const expiryDate = new Date();
-                expiryDate.setDate(expiryDate.getDate() + COOKIE_CONSENT_EXPIRY_DAYS);
-                localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({
-                    value: value,
-                    expiry: expiryDate.toISOString()
-                }));
-            }
-
-            function saveConsentToServer(value) {
-                const visitorToken = getVisitorToken();
-                const formData = new FormData();
-                formData.append('consent', value);
-                formData.append('visitor_token', visitorToken);
-
-                fetch('{{ route('cookie.consent') }}', {
-                    method: 'POST',
-                    headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
-                    body: formData
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('No se pudo guardar el consentimiento.');
-                    return response.json();
-                })
-                .catch(error => console.error('Error al conectar con el servidor:', error));
-            }
-
-            const consent = getConsent();
-            if (consent === null) banner.style.display = 'block';
-
-            acceptBtn.addEventListener('click', function() {
-                setConsentLocal('accepted');
-                saveConsentToServer('accepted');
-                banner.style.display = 'none';
-            });
-
-            rejectBtn.addEventListener('click', function() {
-                setConsentLocal('rejected');
-                saveConsentToServer('rejected');
-                banner.style.display = 'none';
-            });
-        })();
 
         document.querySelectorAll('.faq-hero-question, .faq-question').forEach(btn => {
             btn.addEventListener('click', function() {

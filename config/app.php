@@ -4,7 +4,7 @@ return [
     'name' => env('APP_NAME', 'aislagratis'),
     'env' => env('APP_ENV', 'production'),
     'debug' => (bool) env('APP_DEBUG', false),
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://aislagratis.com'),
     'timezone' => env('APP_TIMEZONE', 'Europe/Madrid'),
     'locale' => env('APP_LOCALE', 'es'),
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
@@ -19,7 +19,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-     
     'leads_rate_limit' => env('LEADS_RATE_LIMIT', 5),
     'leads_decay_minutes' => env('LEADS_DECAY_MINUTES', 10),
 ];

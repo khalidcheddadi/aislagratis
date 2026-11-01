@@ -14,6 +14,9 @@
 /.vscode
 /.zed
 /auth.json
+/imag/sql.sql
+/ai-homepage-source-bundle.md
+/public/images/*.html
 /node_modules
 /public/build
 /public/hot

@@ -271,8 +271,6 @@
         .btn-register { padding: 14px 24px; font-size: 0.75rem; }
     }
 
-    .auth-header-shell { padding: 1rem clamp(16px, 4vw, 64px); background: #fff; border-bottom: 1px solid var(--border-light); }
-    .auth-header-shell .custom-header { padding: 0; }
     .register-hero-section { min-height: 0; padding: clamp(24px, 5vw, 64px) 20px; background: #f1f5f0; }
     .register-hero-section::before, .register-hero-section::after { display: none; }
     .auth-layout {
@@ -321,9 +319,7 @@
 
 @section('content')
 
-    <div class="auth-header-shell">
-        @include('partials.public-header')
-    </div>
+    @include('partials.shared-site-header')
 
     <main>
         <section class="register-hero-section">
@@ -332,9 +328,9 @@
                     <picture class="auth-story-media">
                         <source
                             type="image/webp"
-                            srcset="{{ asset('images/image6-320.webp') }} 320w, {{ asset('images/image6-640.webp') }} 640w, {{ asset('images/image6-960.webp') }} 960w"
+                            srcset="{{ asset('images/colocacion-lana-mineral-640.webp') }} 640w"
                             sizes="(max-width: 900px) 100vw, 40vw">
-                        <img class="auth-story-image" src="{{ asset('images/image6.jpg') }}" alt="Aislamiento de lana mineral aplicado en un ático bajo cubierta" width="1600" height="1200" decoding="async">
+                        <img class="auth-story-image" src="{{ asset('images/colocacion-lana-mineral.jpg') }}" alt="Aislamiento de lana mineral aplicado en un ático bajo cubierta" width="1600" height="1200" fetchpriority="high" decoding="async">
                     </picture>
                     <div class="auth-story-content">
                         <span class="auth-story-label">aislagratis · EMPIEZA AQUÍ</span>
@@ -356,6 +352,10 @@
                     <h1>Crear cuenta</h1>
                 </div>
                 <p class="register-sub">Regístrate para gestionar tus solicitudes y citas.</p>
+
+                @if(request()->boolean('session_expired'))
+                    <div class="alert-error" role="alert">Tu sesión caducó antes de completar el registro. El formulario se ha actualizado; vuelve a intentarlo.</div>
+                @endif
 
                 @if($errors->any())
                     <div class="alert-error" data-aos="zoom-in">

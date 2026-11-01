@@ -30,6 +30,17 @@ class LeadResource extends JsonResource
                 'has_attic' => $this->has_attic,
                 'has_basement' => $this->has_basement,
             ],
+            'eligibility' => [
+                'is_owner' => $this->is_owner,
+                'property_kind' => $this->eligibility_property_kind,
+                'zone' => $this->eligibility_zone,
+                'access' => $this->eligibility_access,
+                'habitable' => $this->eligibility_habitable,
+                'age' => $this->eligibility_age,
+                'prior_aid' => $this->eligibility_prior_aid,
+                'contact_preference' => $this->contact_preference,
+                'cadastral_reference' => $this->cadastral_reference,
+            ],
             'status' => [
                 'value' => $this->status->value,
                 'label' => $this->status->label(),
