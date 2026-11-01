@@ -130,6 +130,27 @@
         }
         .nav-link:hover::after { width: 100%; }
 
+        .video-dialog {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            color: white;
+            background: #050b10;
+        }
+        .video-dialog[open] { display: grid; }
+        .video-dialog::backdrop {
+            background: rgba(5, 11, 16, 0.96);
+            backdrop-filter: blur(12px);
+        }
+        .video-dialog video { outline: none; }
+
         .skip-link {
             position: absolute; left: 50%; top: -100px;
             transform: translateX(-50%);
@@ -1331,10 +1352,10 @@
                         Solicitar estudio gratuito
                         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
                     </a>
-                    <a href="#cae" class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-xl border border-white/20 text-white px-6 py-3.5 rounded-full font-medium text-sm hover:bg-white/10 transition-all hover:-translate-y-0.5">
+                    <button type="button" id="howItWorksButton" class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-xl border border-white/20 text-white px-6 py-3.5 rounded-full font-medium text-sm hover:bg-white/10 transition-all hover:-translate-y-0.5">
                         <i data-lucide="play" class="w-4 h-4" aria-hidden="true"></i>
                         Cómo funciona
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -1361,6 +1382,23 @@
             </div>
         </div>
     </section>
+    </section>
+    <dialog id="howItWorksDialog" class="video-dialog" aria-labelledby="howItWorksTitle">
+        <div class="relative flex h-full w-full items-center justify-center">
+            <video id="howItWorksVideo" class="h-full w-full object-contain" controls playsinline preload="none" aria-label="Vídeo: Cómo funciona AislaGratis">
+                <source data-src="{{ asset('video/AislaGratis_Premium_Cinematic.mp4') }}" type="video/mp4">
+                Tu navegador no puede reproducir este vídeo.
+            </video>
+            <p id="howItWorksPlaybackNotice" class="pointer-events-none absolute bottom-20 left-1/2 w-max max-w-[calc(100%-2rem)] -translate-x-1/2 rounded-full border border-white/15 bg-black/70 px-4 py-2 text-center text-xs text-white/90 backdrop-blur-md sm:text-sm" role="status" aria-live="polite" hidden></p>
+            <div class="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 bg-gradient-to-b from-black/70 to-transparent p-4 sm:p-8">
+                <h2 id="howItWorksTitle" class="pt-2 text-sm font-medium tracking-wide text-white/90 sm:text-base">Cómo funciona AislaGratis</h2>
+                <button type="button" id="closeHowItWorksDialog" class="pointer-events-auto inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent" aria-label="Volver a la página principal">
+                    <i data-lucide="arrow-left" class="h-4 w-4" aria-hidden="true"></i>
+                    <span>Volver</span>
+                </button>
+            </div>
+        </div>
+    </dialog>
 
     <section id="about" class="relative py-24 px-4 sm:px-8 bg-brand-lightBg overflow-hidden">
         <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -2927,6 +2965,71 @@
 
         const homeBackgroundVideo = document.getElementById('homeBackgroundVideo');
         const homeBackgroundSource = homeBackgroundVideo?.querySelector('source[data-src]');
+        const howItWorksButton = document.getElementById('howItWorksButton');
+        const howItWorksDialog = document.getElementById('howItWorksDialog');
+        const howItWorksVideo = document.getElementById('howItWorksVideo');
+        const howItWorksSource = howItWorksVideo?.querySelector('source[data-src]');
+        const howItWorksPlaybackNotice = document.getElementById('howItWorksPlaybackNotice');
+        const closeHowItWorksDialog = document.getElementById('closeHowItWorksDialog');
+        let resumeHomeBackgroundVideo = false;
+
+        if (
+            howItWorksButton instanceof HTMLButtonElement &&
+            howItWorksDialog instanceof HTMLDialogElement &&
+            howItWorksVideo instanceof HTMLVideoElement &&
+            howItWorksSource instanceof HTMLSourceElement &&
+            howItWorksPlaybackNotice instanceof HTMLParagraphElement &&
+            closeHowItWorksDialog instanceof HTMLButtonElement
+        ) {
+            howItWorksButton.addEventListener('click', () => {
+                resumeHomeBackgroundVideo = homeBackgroundVideo instanceof HTMLVideoElement && !homeBackgroundVideo.paused;
+                homeBackgroundVideo?.pause();
+                howItWorksPlaybackNotice.hidden = true;
+                howItWorksDialog.showModal();
+                if (!howItWorksSource.src) {
+                    howItWorksSource.src = howItWorksSource.dataset.src;
+                    howItWorksVideo.load();
+                }
+                howItWorksVideo.play().catch(() => {
+                    if (howItWorksDialog.open) {
+                        howItWorksPlaybackNotice.textContent = 'Pulsa ▶ en los controles para iniciar el vídeo.';
+                        howItWorksPlaybackNotice.hidden = false;
+                    }
+                });
+            });
+
+            howItWorksVideo.addEventListener('playing', () => {
+                howItWorksPlaybackNotice.hidden = true;
+            });
+            howItWorksVideo.addEventListener('error', () => {
+                if (howItWorksDialog.open) {
+                    howItWorksPlaybackNotice.textContent = 'No se pudo cargar el vídeo. Comprueba tu conexión e inténtalo de nuevo.';
+                    howItWorksPlaybackNotice.hidden = false;
+                }
+            });
+            const closeHowItWorks = () => {
+                howItWorksVideo.pause();
+                if (howItWorksVideo.readyState > 0) howItWorksVideo.currentTime = 0;
+                howItWorksSource.removeAttribute('src');
+                howItWorksVideo.load();
+                howItWorksDialog.close();
+                if (resumeHomeBackgroundVideo) {
+                    homeBackgroundVideo.play().catch(error => console.error('Unable to resume the homepage background video.', error));
+                }
+                resumeHomeBackgroundVideo = false;
+                howItWorksButton.focus({ preventScroll: true });
+            };
+
+            closeHowItWorksDialog.addEventListener('click', closeHowItWorks);
+            howItWorksDialog.addEventListener('click', event => {
+                if (event.target === howItWorksDialog) closeHowItWorks();
+            });
+            howItWorksDialog.addEventListener('cancel', event => {
+                event.preventDefault();
+                closeHowItWorks();
+            });
+        }
+
         if (
             homeBackgroundVideo &&
             homeBackgroundSource &&
