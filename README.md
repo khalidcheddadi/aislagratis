@@ -33,7 +33,7 @@ php artisan storage:link
 php artisan serve
 ```
 
-Abre `http://127.0.0.1:8000`. Para MySQL/MariaDB, configura `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD` en `.env` antes de migrar. La base SQLite local, los archivos `.env`, los logs, las dependencias y los assets compilados estan excluidos de Git.
+Abre `http://127.0.0.1:8000`. Para MySQL/MariaDB, configura `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD` en `.env` antes de migrar. La base SQLite local, los archivos `.env`, los logs y las dependencias estan excluidos de Git. Los assets de produccion generados en `public/build/` se incluyen en Git para que el sitio funcione en servidores sin Node.js.
 
 ## Configuracion
 
@@ -86,7 +86,7 @@ GitHub Actions ejecuta las pruebas, audita las dependencias PHP y JavaScript, va
    php artisan optimize
    ```
 
-   El directorio `public/build/` se incluye con el codigo desplegado para que la pagina principal pueda servir sus estilos Tailwind ya compilados incluso si el servidor no ofrece Node.js. Si modificas CSS, JavaScript o vistas que usan utilidades Tailwind, vuelve a ejecutar `npm run build` y publica tambien el `public/build/` actualizado.
+   El directorio `public/build/` incluye los estilos y scripts compilados para las paginas publicas, autenticacion, portal y paneles, ademas de sus dependencias locales. Se incluye con el codigo desplegado para que el sitio funcione incluso si el servidor no ofrece Node.js. Cada vez que modifiques CSS, JavaScript o vistas con utilidades Tailwind, ejecuta `npm run build` y publica tambien el `public/build/` actualizado.
 5. Asegura que el usuario de PHP pueda escribir en `storage/` y `bootstrap/cache/`; antes de ejecutar migraciones, crea una copia de seguridad de la base de datos.
 6. Activa SSL/HTTPS en hPanel, establece `SESSION_SECURE_COOKIE=true` y confirma que las peticiones llegan a `public/index.php` mediante las reglas Apache incluidas.
 7. Comprueba la pagina principal, inicio de sesion, formularios, envio de correo, enlaces de assets, `/robots.txt` y `/sitemap.xml`. Configura cron y un supervisor solo si habilitas tareas programadas o colas.

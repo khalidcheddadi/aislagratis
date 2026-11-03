@@ -422,7 +422,7 @@
             width: 100%;
             padding: 100px 0;
             background: var(--overlay-section),
-                        url('../../images/image12.jpg') center/cover no-repeat;
+                        url('/images/image12.jpg') center/cover no-repeat;
             overflow: hidden;
             z-index: 1;
         }
@@ -905,7 +905,7 @@
             width: 100%;
             padding: 100px 0;
             background: var(--overlay-soft),
-                        url('../../images/image12.jpg') center/cover no-repeat;
+                        url('/images/image12.jpg') center/cover no-repeat;
             overflow: hidden;
             z-index: 1;
         }
@@ -1240,7 +1240,7 @@
             width: 100%;
             padding: 100px 0;
             background: var(--overlay-medium),
-                        url('../../images/image6.jpg') center/cover no-repeat;
+                        url('/images/image6.jpg') center/cover no-repeat;
             overflow: hidden;
             z-index: 1;
         }

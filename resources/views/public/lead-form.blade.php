@@ -5,11 +5,11 @@
 @section('meta_robots', 'noindex, nofollow')
 
 @push('page-styles')
-    <link rel="stylesheet" href="{{ asset('css/eligibility-study.css') }}?v={{ filemtime(public_path('css/eligibility-study.css')) }}">
+    @vite('resources/css/public/eligibility-study.css')
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/eligibility-study.js') }}?v={{ filemtime(public_path('js/eligibility-study.js')) }}" defer></script>
+    @vite('resources/js/public/eligibility-study.js')
 @endpush
 
 @section('content')

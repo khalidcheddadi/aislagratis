@@ -208,9 +208,11 @@ test('selected public and account pages use the dark brand experience', function
             ->assertOk()
             ->assertSee('brand-experience', false)
             ->assertSee('class="shared-site-header"', false)
-            ->assertSee('css/shared-site-header.css', false)
-            ->assertSee('css/brand-experience.css', false)
-            ->assertSee('css/dark-immersive.css', false);
+            ->assertSee('build/assets/shared-site-header-', false)
+            ->assertSee('build/assets/brand-experience-', false)
+            ->assertSee('build/assets/dark-immersive-', false)
+            ->assertSee('build/assets/public-vendor-', false)
+            ->assertSee('build/assets/public-aos-', false);
     }
 
     $this->get(route('login'))
@@ -231,9 +233,9 @@ test('about, services, login, and register use their tailored homepage-inspired 
     ] as $route => $pageClass) {
         $this->get(route($route))
             ->assertOk()
-            ->assertSee('css/brand-pages.css', false)
+            ->assertSee('build/assets/brand-pages-', false)
             ->assertSee($pageClass, false)
-            ->assertSee('home-navbar.css', false);
+            ->assertSee('build/assets/home-navbar-', false);
     }
 
     $this->get(route('about'))
@@ -251,7 +253,7 @@ test('all public content pages inherit the homepage visual theme', function () {
         $this->get(route($route))
             ->assertOk()
             ->assertSee('class="brand-experience"', false)
-            ->assertSee('css/site-theme.css', false)
+            ->assertSee('build/assets/site-theme-', false)
             ->assertSee('class="shared-site-header"', false);
     }
 });
@@ -272,8 +274,7 @@ test('study request page presents the CAE eligibility questionnaire and submits 
         ->assertSee('name="postal_code"', false)
         ->assertSee('name="property_type"', false)
         ->assertSee('name="privacy"', false)
-        ->assertSee('css/eligibility-study.css', false)
-        ->assertSee('js/eligibility-study.js', false)
+        ->assertSee('build/assets/eligibility-study-', false)
         ->assertSee('home-nav-promo-content', false)
         ->assertSee('home-mobile-promo', false)
         ->assertSee('aislamiento-cubierta-instalado-640.webp', false)
@@ -304,7 +305,7 @@ test('the shared homepage navbar links to every public section from every public
         }
 
         $response->assertSee('home-nav-shell', false)
-            ->assertSee('home-navbar.css', false);
+            ->assertSee('build/assets/home-navbar-', false);
     }
 
     $this->get(route('leads.thanks'))
@@ -321,8 +322,8 @@ test('home and public pages share cookie, install, footer, and icon branding', f
             ->assertSee('id="installPrompt"', false)
             ->assertSee('class="brand-footer"', false)
             ->assertSee('class="home-nav-brand-icon"', false)
-            ->assertSee('css/shared-public-ui.css', false)
-            ->assertSee('js/site-prompts.js', false);
+            ->assertSee('build/assets/shared-public-ui-', false)
+            ->assertSee('build/assets/site-prompts-', false);
     }
 
     $this->get(route('home'))
@@ -336,9 +337,9 @@ test('authenticated, profile, and guest pages use the shared theme', function ()
     $this->get(route('password.request'))
         ->assertOk()
         ->assertSee('guest-shell', false)
-        ->assertSee('css/site-theme.css', false)
+        ->assertSee('build/assets/site-theme-', false)
         ->assertSee('home-nav-shell', false)
-        ->assertSee('home-navbar.css', false);
+        ->assertSee('build/assets/home-navbar-', false);
 
     $this->seed(RolesAndPermissionsSeeder::class);
     $admin = User::factory()->admin()->create();
@@ -348,12 +349,12 @@ test('authenticated, profile, and guest pages use the shared theme', function ()
         ->get(route('admin.dashboard'))
         ->assertOk()
         ->assertSee('site-admin', false)
-        ->assertSee('css/site-theme.css', false);
+        ->assertSee('build/assets/site-theme-', false);
 
     $this->get(route('profile.edit'))
         ->assertOk()
         ->assertSee('app-shell', false)
-        ->assertSee('css/site-theme.css', false);
+        ->assertSee('build/assets/site-theme-', false);
 });
 
 test('services page omits the hero copyright and social links', function () {

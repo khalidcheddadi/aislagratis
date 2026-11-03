@@ -127,7 +127,7 @@
         @media (max-width: 420px) { .admin-brand { font-size: .83rem; } .admin-brand-mark { width: 36px; height: 36px; } .admin-logout { padding: 0 10px; } .admin-stats { grid-template-columns: 1fr 1fr; } }
     </style>
     @stack('styles')
-    <link rel="stylesheet" href="{{ asset('css/site-theme.css') }}?v={{ filemtime(public_path('css/site-theme.css')) }}">
+    @vite('resources/css/public/site-theme.css')
     <style>
         .site-admin { --sidebar-width:clamp(228px,16vw,295px); }
         .site-admin.admin-role-sales { --admin-green:#3d7180; --admin-green-dark:#24434c; --admin-green-soft:#eaf3f4; --admin-ground:#eff4f4; --admin-line:#dce7e8; }

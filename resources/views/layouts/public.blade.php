@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    @vite('resources/css/public-vendor.css')
 
     @include('partials.site-icons')
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -652,15 +652,19 @@
 
         @stack('styles')
     </style>
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}?v={{ filemtime(public_path('css/home.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/brand-experience.css') }}?v={{ filemtime(public_path('css/brand-experience.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/dark-immersive.css') }}?v={{ filemtime(public_path('css/dark-immersive.css')) }}">
+    @vite([
+        'resources/css/public/home.css',
+        'resources/css/public/brand-experience.css',
+        'resources/css/public/dark-immersive.css',
+    ])
     @stack('page-styles')
-    <link rel="stylesheet" href="{{ asset('css/site-theme.css') }}?v={{ filemtime(public_path('css/site-theme.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/shared-site-header.css') }}?v={{ filemtime(public_path('css/shared-site-header.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/home-navbar.css') }}?v={{ filemtime(public_path('css/home-navbar.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/brand-pages.css') }}?v={{ filemtime(public_path('css/brand-pages.css')) }}-2">
-    <link rel="stylesheet" href="{{ asset('css/shared-public-ui.css') }}?v={{ filemtime(public_path('css/shared-public-ui.css')) }}">
+    @vite([
+        'resources/css/public/site-theme.css',
+        'resources/css/public/shared-site-header.css',
+        'resources/css/public/home-navbar.css',
+        'resources/css/public/brand-pages.css',
+        'resources/css/public/shared-public-ui.css',
+    ])
 </head>
 <body @class([
     'brand-experience' => true,
@@ -682,16 +686,11 @@
     @include('partials.public-footer')
     @include('partials.whatsapp-float')
 
-    <script src="{{ asset('js/site-prompts.js') }}?v={{ filemtime(public_path('js/site-prompts.js')) }}" defer></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    @vite([
+        'resources/js/public/site-prompts.js',
+        'resources/js/public-aos.js',
+    ])
     <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 80,
-        });
-
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         if (mobileMenuBtn && mobileMenu) {

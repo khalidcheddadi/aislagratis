@@ -14,8 +14,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
         
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <link rel="stylesheet" href="{{ asset('css/site-theme.css') }}?v={{ filemtime(public_path('css/site-theme.css')) }}">
+        @vite(['resources/css/app.css', 'resources/css/public/site-theme.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased app-shell">
         <div class="min-h-screen app-shell-frame">

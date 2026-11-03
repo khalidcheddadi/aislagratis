@@ -59,9 +59,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/shared-site-header.css') }}?v={{ filemtime(public_path('css/shared-site-header.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/home-navbar.css') }}?v={{ filemtime(public_path('css/home-navbar.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/shared-public-ui.css') }}?v={{ filemtime(public_path('css/shared-public-ui.css')) }}">
+    @vite([
+        'resources/css/public/shared-site-header.css',
+        'resources/css/public/home-navbar.css',
+        'resources/css/public/shared-public-ui.css',
+    ])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -3988,7 +3990,9 @@
         })();
     </script>
 
-    <script src="{{ asset('js/site-prompts.js') }}?v={{ filemtime(public_path('js/site-prompts.js')) }}" defer></script>
+    @vite([
+        'resources/js/public/site-prompts.js',
+    ])
 
 </body>
 </html>
