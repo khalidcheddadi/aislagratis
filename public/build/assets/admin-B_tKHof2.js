@@ -1,0 +1,1 @@
+window.confirmDelete=(t,i="¿Eliminar este registro?")=>{confirm(i)&&document.getElementById(t).submit()};const e=document.getElementById("sidebarToggle");e&&e.addEventListener("click",()=>{document.body.classList.toggle("sidebar-open")});

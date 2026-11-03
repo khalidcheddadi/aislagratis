@@ -18,7 +18,6 @@
 /ai-homepage-source-bundle.md
 /public/images/*.html
 /node_modules
-/public/build
 /public/hot
 /public/storage
 /storage/logs/*.log

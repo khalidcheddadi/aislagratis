@@ -1,0 +1,36 @@
+{
+  "_ui-B5LL9sPA.js": {
+    "file": "assets/ui-B5LL9sPA.js",
+    "name": "ui"
+  },
+  "_vendor-BCn5QfZZ.js": {
+    "file": "assets/vendor-BCn5QfZZ.js",
+    "name": "vendor"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-Dn4sSVhF.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/home-tailwind.css": {
+    "file": "assets/home-tailwind-JTml5AvG.css",
+    "src": "resources/css/home-tailwind.css",
+    "isEntry": true
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-B_tKHof2.js",
+    "name": "admin",
+    "src": "resources/js/admin.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DgtRW2Q5.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-BCn5QfZZ.js",
+      "_ui-B5LL9sPA.js"
+    ]
+  }
+}

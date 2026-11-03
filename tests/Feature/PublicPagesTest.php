@@ -19,6 +19,8 @@ test('home page matches the standalone reference design and links to Laravel rou
         ->assertSee('id="mapa-norte"', false)
         ->assertSee('id="cae"', false)
         ->assertSee('id="materiales"', false)
+        ->assertSee('build/assets/home-tailwind-', false)
+        ->assertDontSee('cdn.tailwindcss.com')
         ->assertSee('id="testimonials"', false)
         ->assertSee('id="requisitos"', false)
         ->assertSee('id="faq"', false)

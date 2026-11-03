@@ -86,7 +86,7 @@ GitHub Actions ejecuta las pruebas, audita las dependencias PHP y JavaScript, va
    php artisan optimize
    ```
 
-   Si el plan no ofrece Node.js, ejecuta `npm ci` y `npm run build` localmente y transfiere el directorio generado `public/build/` por SFTP durante el despliegue. No es necesario versionar dependencias ni assets generados.
+   El directorio `public/build/` se incluye con el codigo desplegado para que la pagina principal pueda servir sus estilos Tailwind ya compilados incluso si el servidor no ofrece Node.js. Si modificas CSS, JavaScript o vistas que usan utilidades Tailwind, vuelve a ejecutar `npm run build` y publica tambien el `public/build/` actualizado.
 5. Asegura que el usuario de PHP pueda escribir en `storage/` y `bootstrap/cache/`; antes de ejecutar migraciones, crea una copia de seguridad de la base de datos.
 6. Activa SSL/HTTPS en hPanel, establece `SESSION_SECURE_COOKIE=true` y confirma que las peticiones llegan a `public/index.php` mediante las reglas Apache incluidas.
 7. Comprueba la pagina principal, inicio de sesion, formularios, envio de correo, enlaces de assets, `/robots.txt` y `/sitemap.xml`. Configura cron y un supervisor solo si habilitas tareas programadas o colas.
