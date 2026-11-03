@@ -24,6 +24,25 @@ test('home page matches the standalone reference design and links to Laravel rou
         ->assertSee('id="faq"', false)
         ->assertSee('id="contact"', false)
         ->assertSee('Programa oficial CAE')
+        ->assertSee('Más confort en casa.')
+        ->assertSee('Menos energía que se pierde.')
+        ->assertSee('ESTUDIO TÉCNICO')
+        ->assertSee('Empieza con el estudio técnico')
+        ->assertSee('Visitamos tu vivienda y validamos el ahorro energético antes de comenzar cualquier actuación.')
+        ->assertSee('GESTIÓN CAE')
+        ->assertSee('Gestión completa del expediente CAE')
+        ->assertSee('Tramitamos toda la documentación, ejecutamos la obra y obtenemos la validación final exigida por el sistema oficial.')
+        ->assertSee('EJECUCIÓN')
+        ->assertSee('Actuamos en desván o bajo cubierta')
+        ->assertSee('Es donde más ahorro energético se genera. Reduce pérdidas, mejora el confort y genera el ahorro necesario.')
+        ->assertSee('La elegibilidad, la financiación aplicable y la disponibilidad dependen')
+        ->assertSee('https://www.miteco.gob.es/es/energia/eficiencia/cae.html#accordion-6c9ad09474-item-30e76c36b0', false)
+        ->assertSee('target="_blank" rel="noopener noreferrer"', false)
+        ->assertSee('Nuestros sistemas de aislamiento')
+        ->assertSee('Soluciones técnicas adaptadas a cada tipo de vivienda y cubierta, ejecutadas por nuestro propio equipo.')
+        ->assertSee('id="carouselTrack"', false)
+        ->assertSee('id="proceso-cae"', false)
+        ->assertSee('#main > section { padding-inline: clamp(1rem, 3vw, 2rem); }', false)
         ->assertSee('video/AislaGratis_video_web.mp4', false)
         ->assertSee('video/AislaGratis_Premium_Cinematic.mp4', false)
         ->assertSee('id="howItWorksButton"', false)
@@ -42,7 +61,6 @@ test('home page matches the standalone reference design and links to Laravel rou
         ->assertSee('images/user1.jpg', false)
         ->assertSee('image2-640.webp', false)
         ->assertSee('image5c-640.webp', false)
-        ->assertSee('Medición del espesor del aislamiento durante el estudio técnico')
         ->assertSee('image11-640.webp', false)
         ->assertSee('+34 641 322 118')
         ->assertSee('tel:+34641322118', false)
@@ -54,15 +72,22 @@ test('home page matches the standalone reference design and links to Laravel rou
         ->assertDontSee('Paneles instalados');
 
     $html = $response->getContent();
+    expect($html)
+        ->toContain('avatarEl.src = item.avatar;')
+        ->toContain('avatarEl.alt = `Foto de ${item.author}`;');
+
     preg_match('/const carouselData = \[(.*?)\];\s*const track/s', $html, $lowerCarousel);
     preg_match('/const aboutData = \[(.*?)\];\s*let aboutIdx/s', $html, $upperCarousel);
 
     expect(substr_count($html, 'video/AislaGratis_video_web.mp4'))->toBe(2)
         ->and(substr_count($upperCarousel[1] ?? '', 'video:'))->toBe(4)
+        ->and($upperCarousel[1] ?? '')->not->toContain('img:')
         ->and(substr_count($lowerCarousel[1] ?? '', 'img:'))->toBe(3)
-        ->and($lowerCarousel[1] ?? '')->toContain('images/instalacion-aislamiento-05.jpeg')
-        ->and($lowerCarousel[1] ?? '')->not->toContain('video:')
-        ->and($upperCarousel[1] ?? '')->not->toContain('img:');
+        ->and($lowerCarousel[1] ?? '')->toContain('images/instalacion-aislamiento-05.jpeg');
+
+    expect(strpos($html, 'id="aboutTrack"'))
+        ->toBeLessThan(strpos($html, 'id="proceso-cae"'))
+        ->toBeLessThan(strpos($html, 'id="carouselTrack"'));
 });
 
 test('home map shows all listed cities as covered', function () {
@@ -107,7 +132,7 @@ test('home page displays the five reference testimonials and their photos', func
         ->and(array_map(
             static fn (array $testimonial) => basename(parse_url($testimonial['avatar'], PHP_URL_PATH)),
             $testimonials,
-        ))->toBe(['user1.jpg', 'CHICA5.jpg', 'user3.avif', 'user4.jpg', 'user5.jpg']);
+        ))->toBe(['user1.jpg', 'CHICA5.jpg', 'user3.avif', 'user7.avif', 'user5.jpg']);
 });
 
 test('robots and sitemap endpoints are available to search engines', function () {

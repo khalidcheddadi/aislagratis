@@ -30,7 +30,7 @@
             'role' => 'Propietaria de casa adosada',
             'city' => 'Santander',
             'saving' => '68%',
-            'avatar' => asset('images/user4.jpg'),
+            'avatar' => asset('images/user7.avif'),
         ],
         [
             'quote' => 'Me llamaron, hicieron el estudio y en tres días estaba todo instalado. Ni un solo papel tuve que firmar de más.',
@@ -233,6 +233,7 @@
 
         .marquee-track { animation: marquee 40s linear infinite; width: max-content; }
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        #main > section { padding-inline: clamp(1rem, 3vw, 2rem); }
 
         .mask-line {
             display: block; overflow: hidden;
@@ -1035,7 +1036,8 @@
 
         @media (prefers-reduced-motion: reduce) {
             .letter-3d, .kinetic-word, .ghost-index, .bottom-line,
-            .progress-segment, .tst-header-seg, .tst-dot {
+            .progress-segment, .tst-header-seg, .tst-dot, .marquee-track,
+            #cae .animate-ping {
                 opacity: 1 !important; transform: none !important;
                 filter: none !important; transition: none !important;
                 animation: none !important; width: auto !important;
@@ -1516,52 +1518,107 @@
                 <div class="carousel-3d-track" id="aboutTrack"></div>
             </div>
 
-            <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5">
-                <article class="group relative overflow-hidden rounded-3xl min-h-[400px] flex flex-col justify-between p-7 text-white shadow-xl hover:shadow-2xl transition-all duration-500">
-                    <img src="{{ asset('images/image11-640.webp') }}" style="object-position:center 35%" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Medición del espesor del aislamiento durante el estudio técnico" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10"></div>
-                    <div class="absolute top-0 right-0 text-[9rem] font-bold text-white/[0.06] leading-none pt-4 pr-6 select-none">01</div>
-                    <div class="relative z-10 flex justify-between items-start">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 text-[9px] font-mono tracking-[0.2em] uppercase">Estudio técnico</span>
-                        <div class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center">
-                            <i data-lucide="search-check" class="w-5 h-5 text-white" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-light mb-3 leading-tight">Empieza con el estudio técnico</h3>
-                        <p class="text-xs text-slate-300 leading-relaxed">Visitamos tu vivienda y validamos el ahorro energético antes de comenzar cualquier actuación.</p>
-                    </div>
-                </article>
+            <div id="proceso-cae" class="relative isolate mt-8 overflow-hidden rounded-[2rem] border border-slate-200/70 bg-[#F8FAFC] px-5 py-12 shadow-[0_24px_70px_-48px_rgba(10,22,30,0.35)] sm:mt-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+                <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+                    <div class="absolute -left-40 top-32 h-96 w-96 rounded-full bg-teal-200/25 blur-3xl"></div>
+                    <div class="absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-cyan-100/50 blur-3xl"></div>
+                    <div class="absolute inset-0 opacity-[0.035]" style="background-image:linear-gradient(#0A161E 1px,transparent 1px),linear-gradient(90deg,#0A161E 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,transparent,black 20%,black 80%,transparent);"></div>
+                </div>
 
-                <article class="group relative bg-white rounded-3xl p-7 border border-slate-200/60 overflow-hidden flex flex-col justify-between min-h-[400px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
-                    <div class="absolute top-0 right-0 w-48 h-48 bg-teal-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-teal-100 transition-colors"></div>
-                    <div class="absolute top-0 right-0 text-[9rem] font-bold text-slate-100 leading-none pt-4 pr-6 select-none">02</div>
-                    <div class="relative z-10 flex justify-between items-start">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-200/50 text-[9px] font-mono tracking-[0.2em] uppercase text-teal-800">Gestión CAE</span>
-                        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-white shadow-lg group-hover:rotate-6 transition-transform duration-500">
-                            <i data-lucide="sparkles" class="w-5 h-5" aria-hidden="true"></i>
+                <div class="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-3xl reveal">
+                        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-200/80 bg-white/80 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-teal-800 shadow-sm backdrop-blur">
+                            <span class="relative flex h-2 w-2">
+                                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-50"></span>
+                                <span class="relative inline-flex h-2 w-2 rounded-full bg-teal-600"></span>
+                            </span>
+                            Programa CAE
+                            <span class="h-3 w-px bg-teal-200"></span>
+                            Información oficial · MITECO
                         </div>
+                        <h2 class="text-[clamp(2.7rem,7vw,6.6rem)] font-light leading-[0.98] tracking-[-0.06em] text-brand-dark">
+                            Más confort en casa.<br>
+                            <span class="bg-gradient-to-r from-teal-700 via-teal-600 to-cyan-600 bg-clip-text font-normal text-transparent">Menos energía que se pierde.</span>
+                        </h2>
                     </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-light text-slate-900 mb-3 leading-tight">Gestión completa del expediente CAE</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed">Tramitamos toda la documentación, ejecutamos la obra y obtenemos la validación final exigida por el sistema oficial.</p>
-                    </div>
-                </article>
+                    <a href="https://www.miteco.gob.es/es/energia/eficiencia/cae.html#accordion-6c9ad09474-item-30e76c36b0" target="_blank" rel="noopener noreferrer" class="group inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-brand-dark px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_34px_-18px_rgba(10,22,30,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">
+                        Descubre cómo funciona el CAE
+                        <i data-lucide="arrow-up-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"></i>
+                    </a>
+                </div>
 
-                <article class="group relative bg-gradient-to-br from-brand-dark to-[#0F766E] rounded-3xl p-7 overflow-hidden flex flex-col justify-between min-h-[400px] text-white shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-                    <div class="absolute top-0 right-0 text-[9rem] font-bold text-white/[0.06] leading-none pt-4 pr-6 select-none">03</div>
-                    <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-brand-accent/15 rounded-full blur-3xl"></div>
-                    <div class="relative z-10 flex justify-between items-start">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-[9px] font-mono tracking-[0.2em] uppercase">Ejecución</span>
-                        <div class="w-11 h-11 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-brand-accent">
-                            <i data-lucide="shield-check" class="w-5 h-5" aria-hidden="true"></i>
+                <div class="mb-12 grid gap-8 border-y border-slate-200/80 py-8 lg:mb-16 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:items-end lg:gap-16 lg:py-10">
+                    <p class="max-w-3xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9 reveal">
+                        El sistema de Certificados de Ahorro Energético (CAE) impulsa actuaciones que reducen el consumo de energía, regulado en España por el Real Decreto 36/2023. En aislagratis te acompañamos desde el estudio inicial hasta la instalación de aislamiento en áticos y bajo cubierta, sujeta a la evaluación técnica de cada vivienda.
+                    </p>
+                    <div class="flex items-center gap-4 reveal">
+                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-teal-100 bg-white text-teal-700 shadow-sm">
+                            <i data-lucide="landmark" class="h-5 w-5" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Marco regulatorio</span>
+                            <span class="mt-1 block text-sm font-medium text-brand-dark">Real Decreto 36/2023 · Sistema CAE</span>
                         </div>
                     </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-light mb-3 leading-tight">Actuamos en desván o bajo cubierta</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed">Es donde más ahorro energético se genera. Reduce pérdidas, mejora el confort y genera el ahorro necesario.</p>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-3 lg:gap-5">
+                    <article class="group relative overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 shadow-[0_10px_40px_-30px_rgba(10,22,30,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-200 hover:shadow-[0_24px_50px_-32px_rgba(10,22,30,0.45)] sm:p-8 reveal">
+                        <div class="mb-10 flex items-start justify-between">
+                            <span class="text-xs font-mono font-medium tracking-[0.16em] text-slate-400">ESTUDIO TÉCNICO</span>
+                            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 ring-1 ring-teal-100 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                                <i data-lucide="scan-search" class="h-5 w-5" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-medium tracking-tight text-brand-dark sm:text-2xl">Empieza con el estudio técnico</h3>
+                        <p class="mt-3 text-sm leading-7 text-slate-600">Visitamos tu vivienda y validamos el ahorro energético antes de comenzar cualquier actuación.</p>
+                        <div class="mt-8 h-px w-full bg-gradient-to-r from-teal-300/80 via-slate-200 to-transparent"></div>
+                    </article>
+
+                    <article class="group relative overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 shadow-[0_10px_40px_-30px_rgba(10,22,30,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-200 hover:shadow-[0_24px_50px_-32px_rgba(10,22,30,0.45)] sm:p-8 reveal">
+                        <div class="mb-10 flex items-start justify-between">
+                            <span class="text-xs font-mono font-medium tracking-[0.16em] text-slate-400">GESTIÓN CAE</span>
+                            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 ring-1 ring-teal-100 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                                <i data-lucide="file-check-2" class="h-5 w-5" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-medium tracking-tight text-brand-dark sm:text-2xl">Gestión completa del expediente CAE</h3>
+                        <p class="mt-3 text-sm leading-7 text-slate-600">Tramitamos toda la documentación, ejecutamos la obra y obtenemos la validación final exigida por el sistema oficial.</p>
+                        <div class="mt-8 h-px w-full bg-gradient-to-r from-teal-300/80 via-slate-200 to-transparent"></div>
+                    </article>
+
+                    <article class="group relative overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 shadow-[0_10px_40px_-30px_rgba(10,22,30,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-200 hover:shadow-[0_24px_50px_-32px_rgba(10,22,30,0.45)] sm:p-8 reveal">
+                        <div class="mb-10 flex items-start justify-between">
+                            <span class="text-xs font-mono font-medium tracking-[0.16em] text-slate-400">EJECUCIÓN</span>
+                            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 ring-1 ring-teal-100 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                                <i data-lucide="house" class="h-5 w-5" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-medium tracking-tight text-brand-dark sm:text-2xl">Actuamos en desván o bajo cubierta</h3>
+                        <p class="mt-3 text-sm leading-7 text-slate-600">Es donde más ahorro energético se genera. Reduce pérdidas, mejora el confort y genera el ahorro necesario.</p>
+                        <div class="mt-8 h-px w-full bg-gradient-to-r from-teal-300/80 via-slate-200 to-transparent"></div>
+                    </article>
+                </div>
+
+                <div class="mt-8 flex flex-col gap-6 rounded-[1.75rem] border border-amber-200/70 bg-amber-50/75 p-5 sm:flex-row sm:items-start sm:p-6 reveal">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-amber-700 shadow-sm ring-1 ring-amber-200/70">
+                        <i data-lucide="info" class="h-5 w-5" aria-hidden="true"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-sm font-semibold text-brand-dark">Información importante sobre la elegibilidad</h3>
+                        <p class="mt-1.5 text-xs leading-6 text-slate-600 sm:text-sm">
+                            La elegibilidad, la financiación aplicable y la disponibilidad dependen de la evaluación técnica, los requisitos vigentes y los fondos o cupos disponibles. Consulta las condiciones oficiales en MITECO.
+                        </p>
                     </div>
-                </article>
+                </div>
+
+                <div class="mt-8 flex flex-col items-center justify-between gap-5 sm:flex-row reveal">
+                    <p class="max-w-xl text-xs leading-6 text-slate-500">*Las condiciones, el ahorro y la cobertura final se confirman tras valorar cada vivienda y la disponibilidad del programa.</p>
+                    <a href="https://www.miteco.gob.es/es/energia/eficiencia/cae.html#accordion-6c9ad09474-item-30e76c36b0" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 text-sm font-semibold text-teal-800 transition-colors hover:text-teal-600">
+                        Descubre cómo funciona el CAE
+                        <i data-lucide="arrow-up-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1884,11 +1941,11 @@
         </div>
     </section>
 
-    <section id="cae" class="py-24 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-4 reveal">
-                <h2 class="text-4xl sm:text-5xl font-light text-slate-900">Nuestros sistemas de aislamiento</h2>
-                <p class="text-slate-600 mt-4 max-w-2xl mx-auto">Soluciones técnicas adaptadas a cada tipo de vivienda y cubierta, ejecutadas por nuestro propio equipo.</p>
+    <section id="cae" class="py-24 overflow-hidden bg-white">
+        <div class="mx-auto max-w-7xl">
+            <div class="reveal mb-4 text-center">
+                <h2 class="text-4xl font-light text-slate-900 sm:text-5xl">Nuestros sistemas de aislamiento</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-slate-600">Soluciones técnicas adaptadas a cada tipo de vivienda y cubierta, ejecutadas por nuestro propio equipo.</p>
             </div>
             <div class="carousel-3d-wrapper reveal-3d relative w-full">
                 <button id="prevSlide" aria-label="Anterior" class="absolute top-1/2 left-4 sm:left-[5%] -translate-y-1/2 z-40 w-12 h-12 bg-brand-dark text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-2xl">
@@ -1900,6 +1957,8 @@
                 <div class="carousel-3d-track" id="carouselTrack"></div>
             </div>
         </div>
+
+
     </section>
 
     <section id="materiales" class="relative py-24 sm:py-32 bg-white overflow-hidden border-t border-slate-100">
@@ -2708,7 +2767,7 @@
 
     @include('partials.shared-public-footer')
 
-    <button id="eligibilityBtn" type="button" class="eligibility-fab group inline-flex items-center gap-2 sm:gap-2.5 bg-brand-dark text-white pl-4 sm:pl-5 pr-4 sm:pr-5 py-2.5 sm:py-3 rounded-full text-[11px] sm:text-sm font-medium border border-white/10 shadow-[0_12px_40px_-10px_rgba(10,22,30,0.55)] hover:bg-brand-accent hover:text-brand-dark hover:border-brand-accent whitespace-nowrap" aria-haspopup="dialog" aria-controls="eligibilityModal">
+    <button id="eligibilityBtn" type="button" class="eligibility-fab group inline-flex items-center gap-2.5 sm:gap-3 bg-brand-dark text-white pl-5 sm:pl-6 pr-5 sm:pr-6 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-medium border border-white/10 shadow-[0_12px_40px_-10px_rgba(10,22,30,0.55)] hover:bg-brand-accent hover:text-brand-dark hover:border-brand-accent whitespace-nowrap" aria-haspopup="dialog" aria-controls="eligibilityModal">
         <span class="relative flex w-2 h-2 shrink-0">
             <span class="absolute inset-0 rounded-full bg-brand-accent animate-ping opacity-75 group-hover:bg-brand-dark"></span>
             <span class="relative rounded-full w-2 h-2 bg-brand-accent group-hover:bg-brand-dark"></span>
@@ -3494,12 +3553,11 @@
                 cityEl.textContent = item.city;
                 savingEl.textContent = item.saving;
                 indexEl.textContent = String(index + 1).padStart(2, '0');
-                if (avatarEl.getAttribute('src') !== item.avatar) {
-                    avatarEl.src = item.avatar;
-                    avatarEl.classList.remove('tst-avatar-pop');
-                    void avatarEl.offsetWidth;
-                    avatarEl.classList.add('tst-avatar-pop');
-                }
+                avatarEl.src = item.avatar;
+                avatarEl.alt = `Foto de ${item.author}`;
+                avatarEl.classList.remove('tst-avatar-pop');
+                void avatarEl.offsetWidth;
+                avatarEl.classList.add('tst-avatar-pop');
                 rows.forEach((r, i) => r.classList.toggle('is-active', i === index));
                 dots.forEach((d, i) => { d.classList.toggle('is-active', i === index); d.setAttribute('aria-selected', i === index ? 'true' : 'false'); });
                 const activeRow = rows[index];
